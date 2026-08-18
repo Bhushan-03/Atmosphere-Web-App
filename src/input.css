@@ -5,3 +5,30 @@
 @theme {
   --font-inter: "Inter", sans-serif;
 }
+
+.lightTheme {
+  --weather-bg: #F5F8FC;
+  --weather-navbar: #FFFFFF;
+  --weather-cards: #FFFFFF;
+  --weather-main-text: #172033;
+  --weather-normal-text: #5F6B7A;
+  --weather-muted-text: #8B96A6;
+  --weather-border: #DCE4EE;
+  --weather-primary-btn: #2563EB;
+  --weather-hover-btn: #d4e1f8;
+  --weather-icons: #172033;
+  --weather-active-icons: #3B82F6;
+}
+
+.darkTheme {
+  --weather-bg: #0B1220;
+  --weather-navbar: #0F172A;
+  --weather-cards: #162235;
+  --weather-main-text: #F5F7FA;
+  --weather-normal-text: #AAB6C5;
+  --weather-muted-text: #718096;
+  --weather-border: #28384D;
+  --weather-primary-btn: #60A5FA;
+  --weather-hover-btn: #93C5FD;
+  --weather-active-icons: #60A5FA;
+}

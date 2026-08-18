@@ -8,47 +8,80 @@
 </head>
 <body class="font-inter">
 
-    <div class="screenContainer relative w-screen h-screen bg-[#F4F8FC] grid grid-cols-[20%_80%]">
+    <div class="screenContainer relative w-screen h-screen bg-[#F5F8FC] grid grid-cols-[20%_80%]">
 
-        <div class="sideBar relative w-auto flex flex-col mx-4 my-4 rounded-2xl border ">
+        <div class="sideBar relative w-auto flex flex-col mx-4 my-4 rounded-2xl bg-(--weather-navbar) shadow-2xl p-3">
 
-            <div class="logo flex w-full justify-center">
-                <p class="font-bold">Atmosphere</p>
+            <div class="logo flex w-full justify-center items-center space-x-1">
+                <img class="w-10 h-10" src="Assets/Logo/atmosphere web app logo.png" alt="">
+                <p class="text-2xl font-bold">Atmosphere</p>
             </div>
 
-            <div class="option-section-1 flex flex-col items-start">
-                <button>Weather</button>
-                <button>Forecast</button>
-                <button>Maps</button>
-                <button>Saved Locations</button>
+            <div class="option-section-1 flex flex-col items-start space-y-2 w-full mt-5">
+                <button class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M8.641 1.668C6.482 1.67 4.648 2.999 3.771 4.9l-.06.13-.139.01C1.578 5.183 0 6.91 0 9.007 0 11.2 1.716 13 3.838 13h9.285C14.714 13 16 11.65 16 10.012a2.958 2.958 0 0 0-1.805-2.735l-.136-.058-.01-.149c-.136-2.993-2.487-5.4-5.405-5.402zm0 1c2.368.002 4.291 1.952 4.404 4.447v.01l.051.775.703.297a1.944 1.944 0 0 1 1.196 1.815c.01 1.114-.846 1.988-1.871 1.988H3.838c-1.556 0-2.837-1.321-2.837-2.992C1 7.41 2.185 6.142 3.645 6.035l.723-.05.31-.663v-.004c.728-1.58 2.213-2.648 3.961-2.65z" style="line-height:normal;-inkscape-font-specification:sans-serif;text-indent:0;text-align:start;text-decoration-line:none;text-transform:none;marker:none" color="#000000" font-weight="400" font-family="sans-serif" overflow="visible" fill="gray"/></svg>
+                    <p class="text-(--weather-main-text)">Weather</p>
+                </button>
+                <button class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g><g><path stroke="currentColor" d="M422.268,21.113v-2.639C422.268,8.288,413.98,0,403.794,0H382.68c-10.186,0-18.474,8.288-18.474,18.474v2.639h-79.175 v-2.639C285.031,8.288,276.743,0,266.557,0h-21.113c-10.186,0-18.474,8.288-18.474,18.474v2.639h-79.175v-2.639 C147.794,8.288,139.506,0,129.32,0h-21.113C98.02,0,89.732,8.288,89.732,18.474v2.639H0V512h512V21.113H422.268z M380.041,18.474 c0-1.43,1.209-2.639,2.639-2.639h21.113c1.43,0,2.639,1.209,2.639,2.639V63.34h-26.392V18.474z M242.804,18.474 c0-1.43,1.209-2.639,2.639-2.639h21.113c1.43,0,2.639,1.209,2.639,2.639V63.34h-26.392V18.474z M105.567,18.474 c0-1.43,1.209-2.639,2.639-2.639h21.113c1.43,0,2.639,1.209,2.639,2.639V63.34h-26.392V18.474z M496.165,496.165H15.835V163.629 h480.33V496.165z M496.165,147.794H15.835v-26.392h424.907v-15.835H15.835V36.948h73.897v42.227h58.062V36.948h79.175v42.227 h58.062V36.948h79.175v42.227h58.062V36.948h73.897V147.794z"/></g></g><g><g><path stroke="currentColor" d="M248.082,184.742v68.619H36.948v221.691h332.536v-63.34h105.567V184.742H248.082z M142.515,459.216H52.784v-47.505h89.732 V459.216z M142.515,395.876H52.784v-58.062h89.732V395.876z M142.515,321.979H52.784v-52.784h89.732V321.979z M248.082,459.216 h-89.732v-47.505h89.732V459.216z M248.082,395.876h-89.732v-58.062h89.732V395.876z M248.082,321.979h-89.732v-52.784h89.732 V321.979z M353.649,459.216h-89.732v-47.505h89.732V459.216z M353.649,395.876h-89.732v-58.062h89.732V395.876z M353.649,321.979 h-89.732v-52.784h89.732V321.979z M353.649,253.361h-89.732v-52.784h89.732V253.361z M459.216,395.876h-89.732v-58.062h89.732 V395.876z M459.216,321.979h-89.732v-52.784h89.732V321.979z M459.216,253.361h-89.732v-52.784h89.732V253.361z"/></g></g></svg>
+                    <p class="text-(--weather-main-text)">Forecast</p>
+                </button>
+                <button class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M30.336 1.329c-0.098-0.050-0.213-0.080-0.335-0.080-0.17 0-0.326 0.057-0.452 0.152l0.002-0.001-7.631 5.723-11.585-5.794c-0.098-0.050-0.213-0.079-0.335-0.079-0.17 0-0.326 0.057-0.452 0.152l0.002-0.001-8 6c-0.183 0.138-0.3 0.355-0.3 0.6v0 22c0 0.001 0 0.001 0 0.002 0 0.413 0.335 0.748 0.748 0.748 0.001 0 0.001 0 0.002 0h-0c0.001 0 0.002 0 0.004 0 0.121 0 0.235-0.030 0.335-0.082l-0.004 0.002 7.722-3.861 11.707 3.902c0.071 0.025 0.152 0.039 0.237 0.039 0.122 0 0.238-0.030 0.339-0.082l-0.004 0.002 8-4c0.247-0.126 0.414-0.378 0.414-0.67v0-24c0-0 0-0 0-0.001 0-0.292-0.167-0.544-0.41-0.668l-0.004-0.002zM9.25 25.537l-6.5 3.25v-20.412l6.5-4.875zM10.75 3.214l10.5 5.251v20.494l-10.5-3.499zM29.25 25.537l-6.5 3.249v-20.411l6.5-4.875z"></path></svg>
+                    <p class="text-(--weather-main-text)">Maps</p>
+                </button>
+                <button class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z"></path></svg>
+                    <p class="text-(--weather-main-text)">Saved Locations</p>
+                </button>
             </div>
 
-            <hr>
+            <hr class="text-slate-300 border mt-4">
 
-            <div class="location-options">
-                <p>LOCATIONS</p>
+            <div class="location-options px-2.5 mt-5">
+                <p class="font-semibold text-(--weather-main-text)">LOCATIONS</p>
 
-                <ul>
-                    <li><button>Mumbai</button></li>
-                    <li><button>Pune</button></li>
-                    <li><button>Bengaluru</button></li>
-                    <li><button>Delhi</button></li>
+                <ul class="flex flex-col space-y-4 mt-4">
+                    <li><button class="flex items-center space-x-3">
+                        <svg class="w-4 h-4 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z"></path></svg>
+                        <p class="text-(--weather-main-text)">Mumbai</p>
+                    </button></li>
+                    <li><button class="flex items-center space-x-3">
+                        <svg class="w-4 h-4 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z"></path></svg>
+                        <p class="text-(--weather-main-text)">Pune</p>
+                    </button></li>
+                    <li><button class="flex items-center space-x-3">
+                        <svg class="w-4 h-4 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z"></path></svg>
+                        <p class="text-(--weather-main-text)">Bengaluru</p>
+                    </button></li>
+                    <li><button class="flex items-center space-x-3">
+                        <svg class="w-4 h-4 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z"></path></svg>
+                        <p class="text-(--weather-main-text)">Delhi</p>
+                    </button></li>
                 </ul>
-                <button>Add Location</button>
+                <button class="flex items-center space-x-2.5 mt-5">
+                    <svg class="w-4 h-4 text-(--weather-main-text)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 12H20M12 4V20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <p class="text-(--weather-main-text)">Add Location</p>
+                </button>
             </div>
 
-            <div class="about-option">
-                <button>About</button>
+            <hr class="text-slate-300 border mt-5">
+
+            <div class="about-option w-[90%] absolute bottom-2">
+                <button class="space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme flex relative">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="about-white" fill="#000000" transform="translate(42.666667, 42.666667)"><path stroke="currentColor" d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape"></path></g></g></svg>
+                    <p class="text-(--weather-main-text)">About</p>
+                </button>
             </div>
 
         </div>
 
-        <div class="mainScreen w-auto mx-4 my-4 relative border overflow-y-scroll scrollbar-none">
+        <div class="mainScreen w-auto mx-4 my-4 relative overflow-y-scroll scrollbar-none">
 
             <div class="header flex w-auto justify-between">
 
                 <div class="searchBar w-2/4">
-                    <input type="text" placeholder="Search for a city or place...">
+                    <input class="w-full shadow p-3 rounded-2xl bg-(--weather-navbar)" type="text" placeholder="Search for a city or place...">
                 </div>
 
                 <div class="temperature-option">
