@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmosphere</title>
+    <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="font-inter">
+
+    <div class="screenContainer relative w-screen h-screen bg-[#F4F8FC] grid grid-cols-[20%_80%]">
+
+        <div class="sideBar relative w-auto flex flex-col mx-4 my-4 rounded-2xl border ">
+
+            <div class="logo flex w-full justify-center">
+                <p class="font-bold">Atmosphere</p>
+            </div>
+
+            <div class="option-section-1 flex flex-col items-start">
+                <button>Weather</button>
+                <button>Forecast</button>
+                <button>Maps</button>
+                <button>Saved Locations</button>
+            </div>
+
+            <hr>
+
+            <div class="location-options">
+                <p>LOCATIONS</p>
+
+                <ul>
+                    <li><button>Mumbai</button></li>
+                    <li><button>Pune</button></li>
+                    <li><button>Bengaluru</button></li>
+                    <li><button>Delhi</button></li>
+                </ul>
+                <button>Add Location</button>
+            </div>
+
+            <div class="about-option">
+                <button>About</button>
+            </div>
+
+        </div>
+
+        <div class="mainScreen w-auto mx-4 my-4 relative border overflow-y-scroll scrollbar-none">
+
+            <div class="header flex w-auto justify-between">
+
+                <div class="searchBar w-2/4">
+                    <input type="text" placeholder="Search for a city or place...">
+                </div>
+
+                <div class="temperature-option">
+                    <input type="checkbox" name="" id="temp-toggle" class="peer hidden">
+                    <label for="temp-toggle" class="w-20 h-10 relative block bg-white rounded-3xl shadow-[inset_0px_5px_15px_rgba(0,0,0,0.4),inset_0px_-5px_15px_rgba(255,255,255,0.4)] cursor-pointer after:content-[''] after:w-8 after:h-8 after:absolute after:rounded-full after:bg-[linear-gradient(180deg,#ffcc89,#d8860b)] after:top-1 after:left-1.5 peer-checked:bg-[#242424] peer-checked:after:left-18.5 peer-checked:after:transform-[translateX(-100%)] peer-checked:after:bg-[linear-gradient(180deg,#777,#3a3a3a)] transition-[0.3s] after:transition-[0.3s]"></label>
+                </div>
+
+                <div class="theme-options min-w-4 max-w-45 max-h-5 relative">
+                    <div class="select bg-amber-100 text-black flex justify-between items-center border-[2px_#2a2f3b_solid] rounded-[0.5em] p-[1em] cursor-pointer transition-[background_0.3s] active:border-[2px_#26489a_solid] active:shadow-[0_0_0.8em_#26489a] hover:bg-[#323741]">
+                        <span class="selected">Dynamic Mode</span>
+                        <div class="caret w-0 h-0 border-x-[5px_solid_transparent] border-y-[6px_solid_#fff] transition-[0.3s]"></div>
+                    </div>
+                    <ul class="menu hidden">
+                        <li class="active">Dynamic Mode</li>
+                        <li>Light Mode</li>
+                        <li>Dark Mode</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="weather-Main-Card w-full h-[40%] bg-sky-500">
+
+                <div class="clw-info">
+
+                    <div class="clocation flex items-center">
+                        <p>Mumbai, Maharashtra</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="15" height="15" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -1.062 0 -2.043 -0.561 -2.583 -1.475 l -4.471 -7.563 c -9.222 -15.591 -17.933 -30.317 -20.893 -36.258 c -2.086 -4.277 -3.138 -8.852 -3.138 -13.62 C 13.916 13.944 27.86 0 45 0 c 17.141 0 31.085 13.944 31.085 31.084 c 0 4.764 -1.051 9.339 -3.124 13.596 c -0.021 0.042 -0.042 0.083 -0.063 0.124 c -3.007 6.005 -11.672 20.654 -20.843 36.159 l -4.472 7.563 C 47.044 89.439 46.062 90 45 90 z M 45 6 C 31.168 6 19.916 17.253 19.916 31.084 c 0 3.848 0.847 7.539 2.518 10.969 c 2.852 5.721 11.909 21.033 20.667 35.839 L 45 81.104 l 1.89 -3.196 c 8.763 -14.813 17.823 -30.131 20.687 -35.879 c 0.012 -0.022 0.023 -0.045 0.035 -0.067 c 1.642 -3.406 2.474 -7.065 2.474 -10.877 C 70.085 17.253 58.832 6 45 6 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 45 44.597 c -8.076 0 -14.646 -6.57 -14.646 -14.646 S 36.924 15.306 45 15.306 c 8.075 0 14.646 6.57 14.646 14.646 S 53.075 44.597 45 44.597 z M 45 21.306 c -4.767 0 -8.646 3.878 -8.646 8.646 s 3.878 8.646 8.646 8.646 c 4.768 0 8.646 -3.878 8.646 -8.646 S 49.768 21.306 45 21.306 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                    </div>
+
+                    <div class="cl-dt flex space-x-1">
+                        <p>Thursday</p>
+                        <p>•</p>
+                        <p>13 Aug 2026</p>
+                        <p>•</p>
+                        <p>1:30 PM</p>
+                    </div>
+
+                    <div class="clw">
+                        <p>Partly Cloudy</p>
+                        <p>28°</p>
+                        <div class="hl-temp flex">
+                            <div class="l-temp flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 41.513 61.694 L 27.244 75.963 V 5.588 c 0 -1.933 -1.567 -3.5 -3.5 -3.5 s -3.5 1.567 -3.5 3.5 v 70.375 L 5.975 61.694 c -1.366 -1.367 -3.583 -1.367 -4.95 0 c -1.367 1.366 -1.367 3.583 0 4.949 l 20.241 20.241 c 0.163 0.164 0.343 0.31 0.536 0.439 c 0.085 0.057 0.176 0.095 0.264 0.143 c 0.112 0.061 0.219 0.129 0.338 0.178 c 0.114 0.047 0.234 0.074 0.351 0.109 c 0.101 0.03 0.197 0.069 0.302 0.089 c 0.226 0.045 0.456 0.069 0.685 0.069 s 0.459 -0.024 0.685 -0.069 c 0.104 -0.021 0.201 -0.06 0.302 -0.089 c 0.118 -0.035 0.237 -0.062 0.351 -0.109 c 0.119 -0.049 0.226 -0.117 0.338 -0.178 c 0.088 -0.048 0.18 -0.087 0.264 -0.143 c 0.193 -0.129 0.373 -0.275 0.536 -0.439 l 20.241 -20.241 c 1.367 -1.366 1.367 -3.583 0 -4.949 C 45.096 60.328 42.88 60.327 41.513 61.694 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>25°</p>
+                            </div>
+
+                            <div class="h-temp flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 88.975 23.356 L 68.73 3.113 c -0.001 -0.001 -0.003 -0.002 -0.004 -0.003 c -0.633 -0.631 -1.506 -1.022 -2.471 -1.022 c -0.967 0 -1.843 0.393 -2.477 1.028 L 43.538 23.357 c -1.367 1.367 -1.367 3.583 0 4.95 c 1.366 1.366 3.582 1.367 4.949 0 l 14.269 -14.269 v 70.374 c 0 1.933 1.567 3.5 3.5 3.5 s 3.5 -1.567 3.5 -3.5 V 14.037 l 14.27 14.269 c 0.684 0.683 1.579 1.025 2.475 1.025 s 1.791 -0.342 2.475 -1.025 C 90.342 26.939 90.342 24.724 88.975 23.356 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>31°</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clwd">
+                        <div class="clwd-humidity flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>Humidity</p>    
+                            <p>78%</p>                    
+                        </div>
+
+                        <div class="clwd-wind flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 77.421 40.236 H 2 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 75.421 c 4.73 0 8.579 -3.849 8.579 -8.579 s -3.849 -8.579 -8.579 -8.579 c -2.292 0 -4.446 0.893 -6.066 2.513 c -0.781 0.781 -2.047 0.781 -2.828 0 c -0.781 -0.781 -0.781 -2.047 0 -2.829 c 2.375 -2.376 5.534 -3.685 8.895 -3.685 C 84.357 15.078 90 20.721 90 27.657 S 84.357 40.236 77.421 40.236 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 77.421 74.923 c -3.36 0 -6.519 -1.309 -8.895 -3.685 c -0.781 -0.781 -0.781 -2.047 0 -2.828 s 2.047 -0.781 2.828 0 c 1.62 1.62 3.775 2.513 6.066 2.513 c 4.73 0 8.579 -3.849 8.579 -8.58 c 0 -4.73 -3.849 -8.579 -8.579 -8.579 H 2 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 75.421 C 84.357 49.764 90 55.406 90 62.343 S 84.357 74.923 77.421 74.923 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 50.442 27.142 H 2 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 48.442 c 4.73 0 8.579 -3.849 8.579 -8.579 c 0 -4.731 -3.849 -8.58 -8.579 -8.58 c -2.291 0 -4.446 0.893 -6.067 2.513 c -0.782 0.781 -2.047 0.78 -2.829 0 c -0.781 -0.781 -0.781 -2.047 0 -2.829 c 2.376 -2.375 5.536 -3.684 8.895 -3.684 c 6.937 0 12.579 5.643 12.579 12.58 C 63.021 21.499 57.379 27.142 50.442 27.142 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 50.442 88.017 c -3.36 0 -6.52 -1.309 -8.896 -3.685 c -0.781 -0.781 -0.781 -2.048 0 -2.828 c 0.781 -0.781 2.047 -0.781 2.829 0 c 1.62 1.62 3.774 2.513 6.066 2.513 c 4.73 0 8.579 -3.849 8.579 -8.579 s -3.849 -8.579 -8.579 -8.579 H 2 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 48.442 c 6.937 0 12.579 5.643 12.579 12.579 S 57.379 88.017 50.442 88.017 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>Wind</p>
+                            <p>14 km/h SW</p>
+                        </div>
+
+                        <div class="clwd-pressure flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 78.931 c -19.375 0 -35.137 -15.763 -35.137 -35.137 C 9.863 24.419 25.625 8.657 45 8.657 c 0.552 0 1 0.448 1 1 s -0.448 1 -1 1 c -18.271 0 -33.137 14.865 -33.137 33.137 S 26.729 76.931 45 76.931 s 33.137 -14.865 33.137 -33.137 c 0 -5.176 -1.16 -10.133 -3.447 -14.732 c -0.246 -0.495 -0.044 -1.095 0.45 -1.341 c 0.494 -0.245 1.096 -0.044 1.341 0.45 c 2.426 4.879 3.656 10.135 3.656 15.623 C 80.137 63.168 64.374 78.931 45 78.931 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 45 88.794 c -24.813 0 -45 -20.187 -45 -45 c 0 -0.552 0.448 -1 1 -1 s 1 0.448 1 1 c 0 23.71 19.29 43 43 43 c 23.71 0 43 -19.29 43 -43 c 0 -12.991 -5.784 -25.151 -15.87 -33.362 c -0.428 -0.349 -0.492 -0.979 -0.144 -1.407 c 0.348 -0.427 0.979 -0.494 1.407 -0.144 C 83.947 17.474 90 30.199 90 43.794 C 90 68.607 69.813 88.794 45 88.794 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(248,204,29); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 68.635 3.889 h -1.682 V 2.206 c 0 -0.552 -0.447 -1 -1 -1 s -1 0.448 -1 1 v 1.683 h -1.683 c -0.553 0 -1 0.448 -1 1 s 0.447 1 1 1 h 1.683 v 1.682 c 0 0.552 0.447 1 1 1 s 1 -0.448 1 -1 V 5.889 h 1.682 c 0.553 0 1 -0.448 1 -1 S 69.188 3.889 68.635 3.889 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(248,204,29); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 63.816 16.145 c -0.461 -0.304 -1.082 -0.171 -1.384 0.291 L 45.569 42.297 c -0.883 -0.185 -1.839 0.062 -2.525 0.747 c -1.08 1.08 -1.08 2.831 0 3.911 c 1.08 1.08 2.831 1.08 3.911 0 c 0.971 -0.971 1.061 -2.481 0.285 -3.562 l 16.867 -25.865 C 64.41 17.066 64.279 16.446 63.816 16.145 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 46.355 68.257 c -3.222 0 -6.451 -0.641 -9.511 -1.931 c -6.022 -2.539 -10.694 -7.271 -13.157 -13.325 c -2.463 -6.053 -2.421 -12.703 0.118 -18.725 c 4.194 -9.947 14.599 -16.038 25.321 -14.81 c 0.548 0.063 0.942 0.559 0.879 1.107 s -0.56 0.942 -1.107 0.88 c -9.842 -1.134 -19.399 4.465 -23.25 13.6 c -2.332 5.529 -2.37 11.636 -0.108 17.195 c 2.261 5.559 6.552 9.903 12.082 12.234 c 6.252 2.639 13.282 2.321 19.283 -0.867 c 0.49 -0.262 1.093 -0.075 1.353 0.413 s 0.074 1.094 -0.413 1.353 C 54.245 67.293 50.306 68.257 46.355 68.257 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(248,204,29); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 63.699 62.342 c -1.44 0 -2.817 -0.83 -3.443 -2.228 c -0.41 -0.917 -0.439 -1.94 -0.081 -2.881 c 0.358 -0.939 1.062 -1.684 1.98 -2.095 c 1.896 -0.846 4.127 0.004 4.976 1.899 c 0.848 1.896 -0.004 4.127 -1.899 4.976 C 64.733 62.236 64.212 62.342 63.699 62.342 z M 63.69 56.811 c -0.24 0 -0.485 0.05 -0.719 0.154 c -0.431 0.192 -0.76 0.541 -0.928 0.982 c -0.169 0.44 -0.155 0.92 0.038 1.35 c 0.397 0.889 1.44 1.29 2.333 0.891 c 0.889 -0.397 1.288 -1.444 0.89 -2.333 C 65.012 57.2 64.366 56.811 63.69 56.811 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(248,204,29); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>Pressure</p>
+                            <p>1008 hPa</p>
+                        </div>
+
+                        <div class="clwd-visibility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 73.264 c -14.869 0 -29.775 -8.864 -44.307 -26.346 c -0.924 -1.112 -0.924 -2.724 0 -3.836 C 15.225 25.601 30.131 16.737 45 16.737 c 14.868 0 29.775 8.864 44.307 26.345 c 0.925 1.112 0.925 2.724 0 3.836 C 74.775 64.399 59.868 73.264 45 73.264 z M 6.934 45 C 19.73 59.776 32.528 67.264 45 67.264 c 12.473 0 25.27 -7.487 38.066 -22.264 C 70.27 30.224 57.473 22.737 45 22.737 C 32.528 22.737 19.73 30.224 6.934 45 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/><path d="M 45 62 c -9.374 0 -17 -7.626 -17 -17 s 7.626 -17 17 -17 s 17 7.626 17 17 S 54.374 62 45 62 z M 45 34 c -6.065 0 -11 4.935 -11 11 s 4.935 11 11 11 s 11 -4.935 11 -11 S 51.065 34 45 34 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>Visibility</p>
+                            <p>8.4 km</p>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="hourly-fc-container">
+                <p>HOURLY FORECAST</p>
+
+                <div class="h-fc-boxes flex space-x-2">
+                    <div class="h-fc-b1 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+
+                    <div class="h-fc-b2 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+
+                    <div class="h-fc-b3 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+
+                    <div class="h-fc-b4 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+
+                    <div class="h-fc-b5 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+
+                    <div class="h-fc-b6 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+
+                    <div class="h-fc-b7 border w-fit">
+                        <p>Now</p>
+                        <img src="Assets/partly-cloudy-day.png" alt="">
+                        <p>28°</p>
+                        <div class="rain-possebility flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                            <p>24%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2">
+
+                <div class="10d-fc-container">
+                    <p>10-DAYS FORECAST</p>
+                    <div class="daily-fc">
+
+                        <div class="d1-fc flex">
+                            <p>Today</p>
+                            <img class="w-6 h-6" src="Assets/partly-cloudy-day.png" alt="">
+                            <p>25°</p>
+                            <div></div>
+                            <p>31°</p>
+                            <div class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>24%</p>
+                            </div>
+                        </div>
+
+                        <div class="d2-fc flex">
+                            <p>1 PM</p>
+                            <img class="w-6 h-6" src="Assets/partly-cloudy-day.png" alt="">
+                            <p>25°</p>
+                            <div></div>
+                            <p>31°</p>
+                            <div class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>24%</p>
+                            </div>
+                        </div>
+
+                        <div class="d3-fc flex">
+                            <p>2 PM</p>
+                            <img class="w-6 h-6" src="Assets/partly-cloudy-day.png" alt="">
+                            <p>25°</p>
+                            <div></div>
+                            <p>31°</p>
+                            <div class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>24%</p>
+                            </div>
+                        </div>
+
+                        <div class="d4-fc flex">
+                            <p>3 PM</p>
+                            <img class="w-6 h-6" src="Assets/partly-cloudy-day.png" alt="">
+                            <p>25°</p>
+                            <div></div>
+                            <p>31°</p>
+                            <div class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>24%</p>
+                            </div>
+                        </div>
+
+                        <div class="d5-fc flex">
+                            <p>4 PM</p>
+                            <img class="w-6 h-6" src="Assets/partly-cloudy-day.png" alt="">
+                            <p>25°</p>
+                            <div></div>
+                            <p>31°</p>
+                            <div class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"><path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/></g></svg>
+                                <p>24%</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="w-a-g-container">
+                    <div class="w-a-g-humidity">
+                        <img src="Assets/humidity.png" alt="">
+                        <div>
+                            <p>Humidity</p>
+                            <p>78%</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-wind">
+                        <img src="Assets/wind.png" alt="">
+                        <div>
+                            <p>Wind</p>
+                            <p>14 km/h SW</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-precipitation">
+                        <img src="Assets/precipiation.png" alt="">
+                        <div>
+                            <p>Precipiation</p>
+                            <p>62%</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-uvIndex">
+                        <img src="Assets/uv-index.png" alt="">
+                        <div>
+                            <p>UV Index</p>
+                            <p>6.2</p>
+                            <p>Moderate</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-visibility">
+                        <img src="Assets/visibility.png" alt="">
+                        <div>
+                            <p>Visibility</p>
+                            <p>8.4 km</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-cloud-cover">
+                        <img src="Assets/cloud-cover.png" alt="">
+                        <div>
+                            <p>Cloud Cover</p>
+                            <p>62%</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-sunrise">
+                        <img src="Assets/sunrise.png" alt="">
+                        <div>
+                            <p>Sunrise</p>
+                            <p>6:12 AM</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-sunset">
+                        <img src="Assets/wind.png" alt="">
+                        <div>
+                            <p>Sunset</p>
+                            <p>6:58 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="w-a-g-pressure">
+                        <img src="Assets/pressure.png" alt="">
+                        <div>
+                            <p>Pressure</p>
+                            <p>1008 hPa</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2">
+
+                <div class="temp-ov-container">
+                    <div class="t-ov-header">
+                        <p>TEMPERATURE OVERVIEW</p>
+                        <p>Today</p>
+                    </div>
+                    <div class="t-ov-graph"></div>
+                </div>
+
+                <div class="wind-container">
+                    <p>WIND</p>
+                    <div class="w-c-content">
+                        <p>Current Wind</p>
+                        <p>14 km/h</p>
+                        <p>Southwest</p>
+                        <p>Wind Gu</p>
+                        <p>22 km/h</p>
+                    </div>
+                    <div class="wind-graph"></div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2">
+
+                <div class="air-quality-container">
+                    <p>AIR QUALITY</p>
+                    <div>
+                        <p>AQI</p>
+                        <p>42</p>
+                    </div>
+                    <div class="a-q-graph"></div>
+                    <div class="a-q-details flex">
+                        <div>
+                            <p>PM2.5</p>
+                            <p>18</p>
+                            <p>Good</p>
+                        </div>
+
+                        <div>
+                            <p>PM10</p>
+                            <p>32</p>
+                            <p>Good</p>
+                        </div>
+
+                        <div>
+                            <p>NO2</p>
+                            <p>14</p>
+                            <p>Good</p>
+                        </div>
+
+                        <div>
+                            <p>O2</p>
+                            <p>28</p>
+                            <p>Good</p>
+                        </div>
+
+                        <div>
+                            <p>CO</p>
+                            <p>6</p>
+                            <p>Good</p>
+                        </div>
+
+                        <div>
+                            <p>SO2</p>
+                            <p>5</p>
+                            <p>Good</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uv-i-container">
+                    <p>UV INDEX</p>
+                    <div class="flex">
+                        <div>
+                            <p>6.2</p>
+                            <p>Moderate</p>
+                        </div>
+                        <div>
+                            <p>Max UV Today</p>
+                            <p>7.3</p>
+                            <p>High</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Sun protection is recommended.</p>
+                        <div>
+                            <div class="uv-i-graph"></div>
+                            <div>
+                                <p>UV Exposure</p>
+                                <p>25 min</p>
+                                <p>Recommended Max</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2">
+
+                <div class="rise-set-container">
+                    <p>SUNRISE & SUNSET</p>
+                    <div class="sr-st-graph"></div>
+                    <div>
+                        <p>Daylight</p>
+                        <p>12h 46m</p>
+                    </div>
+                </div>
+
+                <div class="weather-alert-container">
+                    <p>WEATHER ALERTS</p>
+                    <div>
+                        <div class="alert-icon"></div>
+                        <div>
+                            <p>Heavy Rain Expected</p>
+                            <p>Heavy rain is expected in Mumbai between 2:00 PM - 4:00 PM today.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Stay safe and avoid outdoor activities.</p>
+                        <p>2 hours ago</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="weather-map-container">
+                <p>WEATHER MAP</p>
+                <div class="w-m-btns flex">
+                    <button>Rader</button>
+                    <button>Temperature</button>
+                    <button>Wind</button>
+                    <button>Clouds</button>
+                    <button>Satellite</button>
+                </div>
+                <div class="w-m-box"></div>
+            </div>
+
+        </div>
+
+    </div>
+    
+</body>
+</html>
