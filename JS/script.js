@@ -1,23 +1,23 @@
 
 function weatherOptions() {
-    
+
     const dropdown = document.querySelectorAll('.dropdown');
-    
+
     dropdown.forEach(theme_option => {
         const select = theme_option.querySelector('.select');
         const caret = theme_option.querySelector('.caret');
         const menu = theme_option.querySelector('.menu');
         const options = theme_option.querySelectorAll('.menu li');
         const selected = theme_option.querySelectorAll('.selected');
-        
-        select.addEventListener("click", ()=> {
+
+        select.addEventListener("click", () => {
             select.classList.toggle('selected-clicked');
             caret.classList.toggle('caret-rotate');
             menu.classList.toggle('menu-open');
         });
-        
+
         options.forEach(option => {
-            option.addEventListener("click", ()=> {
+            option.addEventListener("click", () => {
                 console.log(selected[0].innerHTML);
                 selected[0].innerHTML = option.innerHTML;
                 select.classList.remove("select-clicked");
@@ -33,3 +33,122 @@ function weatherOptions() {
 }
 
 weatherOptions();
+
+function caltempdiff(min, max) {
+    let tempDiff = Number(max) - Number(min);
+    if (tempDiff >= 9) {
+        tempDiff = 9;
+        return tempDiff;
+    }
+    return tempDiff + 1;
+}
+
+function getminmaxtemp(mntemps, mxtemps) {
+
+}
+
+function setTempBar() {
+    const tempBars = document.querySelectorAll(".tempBar");
+    // const minTemp = document.querySelectorAll(".min-temp").innerHTML.split("°")[0];
+    // const maxTemp = document.querySelectorAll(".max-temp").innerHTML.split("°")[0];
+    const minTemps = document.querySelectorAll(".min-temp");
+    const maxTemps = document.querySelectorAll(".max-temp");
+    console.log(minTemps);
+    console.log(maxTemps);
+    let index = 0;
+    tempBars.forEach(tempbar => {
+        console.log(index);
+        // console.log(minTemps[index].innerHTML.split("°")[0]);
+        // console.log(maxTemps[index].innerHTML.split("°")[0]);
+        const tempdiff = caltempdiff(minTemps[index].innerHTML.split("°")[0], maxTemps[index].innerHTML.split("°")[0]);
+        tempbar.style.width = `${tempdiff * 10}%`;
+        index += 1;
+    });
+}
+setTempBar();
+
+
+function temo_ov_linegraph() {
+    var chartOptions = {
+        chart: {
+            height: 400,
+            type: 'line',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            foreColor: '#6E729B',
+            toolbar: {
+                show: false,
+            },
+        },
+        colors: ['#FA7C16', '#567AFC'],
+        stroke: {
+            curve: 'smooth',
+            width: 2,
+        },
+        series: [
+            {
+                name: 'Feels Like',
+                data: [30, 31, 30, 29, 31, 32, 30, 31],
+            },
+            {
+                name: 'Temperature',
+                data: [25, 21, 24, 23, 24, 22, 23, 24],
+            },
+        ],
+        markers: {
+            size: 6,
+            strokeWidth: 0,
+            hover: {
+                size: 9,
+            },
+        },
+        grid: {
+            show: true,
+            padding: {
+                bottom: 0,
+            },
+        },
+
+        yaxis: {
+            min: 20,
+            max: 34,
+            tickAmount: 14,
+            labels: {
+                style: {
+                    color: '#6E729B',
+                },
+                formatter: function (value) {
+                    return value;
+                },
+            },
+        },
+
+        //   labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+        labels: ['12 PM', '3 PM', '6 PM', '9 PM', '12 AM', '3 AM', '6 AM', '9 AM'],
+        xaxis: {
+            tooltip: {
+                enabled: false,
+            },
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetY: -5,
+            labels: {
+                colors: '#373d3f',
+            },
+        },
+        grid: {
+            borderColor: '#D9DBF3',
+            xaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+        },
+    };
+
+    var lineChart = new ApexCharts(document.querySelector('.tov-line-chart'), chartOptions);
+    lineChart.render();
+}
+
+temo_ov_linegraph();

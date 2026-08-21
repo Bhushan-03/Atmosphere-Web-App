@@ -19,6 +19,7 @@
   --weather-hover-btn: #d4e1f8;
   --weather-icons: #172033;
   --weather-active-icons: #3B82F6;
+  --weather-links: #2563EB;
 }
 
 .darkTheme {
@@ -33,6 +34,7 @@
   --weather-primary-btn: #60A5FA;
   --weather-hover-btn: #93C5FD;
   --weather-active-icons: #60A5FA;
+  --weather-links: #2563EB;
 }
 
 .select-clicked {
