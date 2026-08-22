@@ -53,11 +53,8 @@ function setTempBar() {
     // const maxTemp = document.querySelectorAll(".max-temp").innerHTML.split("°")[0];
     const minTemps = document.querySelectorAll(".min-temp");
     const maxTemps = document.querySelectorAll(".max-temp");
-    console.log(minTemps);
-    console.log(maxTemps);
     let index = 0;
     tempBars.forEach(tempbar => {
-        console.log(index);
         // console.log(minTemps[index].innerHTML.split("°")[0]);
         // console.log(maxTemps[index].innerHTML.split("°")[0]);
         const tempdiff = caltempdiff(minTemps[index].innerHTML.split("°")[0], maxTemps[index].innerHTML.split("°")[0]);
@@ -132,7 +129,7 @@ function temo_ov_linegraph() {
         legend: {
             position: 'top',
             horizontalAlign: 'left',
-            offsetY: -5,
+            offsetY: 5,
             labels: {
                 colors: '#373d3f',
             },
@@ -150,5 +147,83 @@ function temo_ov_linegraph() {
     var lineChart = new ApexCharts(document.querySelector('.tov-line-chart'), chartOptions);
     lineChart.render();
 }
-
 temo_ov_linegraph();
+
+function windChart() {
+    const canvas = document.getElementById("windGustChart");
+    const labels = ["12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM", "12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM", "8 AM", "9 AM"];
+    const windGusts = [10, 17, 22, 19, 18, 24, 25, 23, 17, 18, 14, 10, 18, 20, 18, 17, 24, 25, 18, 16, 16, 23];
+    const ctx = canvas.getContext("2d");
+
+    // Blue gradient
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+
+    gradient.addColorStop(0, "rgba(59, 130, 246, 0.45)");
+    gradient.addColorStop(0.6, "rgba(59, 130, 246, 0.15)");
+    gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels,
+            datasets: [
+                {
+                    label: "Wind Gusts",
+                    data: windGusts,
+                    borderColor: "#3b82f6",
+                    backgroundColor: gradient,
+                    fill: true,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: "#ffffff",
+                    pointHoverBorderColor: "#3b82f6",
+                    pointHoverBorderWidth: 3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: "index"
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    displayColors: false,
+                    backgroundColor: "#0f172a",
+                    titleColor: "#ffffff",
+                    bodyColor: "#cbd5e1",
+                    padding: 12,
+                    cornerRadius: 10,
+                    callbacks: {
+                        label: function (context) {
+                            return ` Wind gust: ${context.parsed.y} km/h`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 40,
+                    ticks: {
+                        color: "#64748b",
+                        stepSize: 10,
+                        padding: 10,
+                        callback: function (value) {
+                            return value;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+windChart();

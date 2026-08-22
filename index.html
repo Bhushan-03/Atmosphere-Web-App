@@ -460,85 +460,111 @@
 
             </div>
 
-            <div class="grid grid-cols-2 mt-4 relative h-[65%]">
+            <div class="grid grid-cols-2 relative h-[60%] min-h-0">
 
-                <div class="temp-ov-container px-4 py-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) h-[95%]">
-                    <div class="t-ov-header flex justify-between">
+                <div class="temp-ov-container px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
+                    <div class="t-ov-header flex justify-between shrink-0">
                         <p class="font-semibold text-(--weather-main-text)">TEMPERATURE OVERVIEW</p>
                         <p>Today</p>
                     </div>
-                    <div class="t-ov-graph-card w-full h-full p-3.5 relative">
-                        <div class="tovgraph-cardcontainer relative z-3">
-                            <div class="tov-line-chart"></div>
+                    <div class="t-ov-graph-card w-full flex-1 min-h-0 relative">
+                        <div class="tovgraph-cardcontainer relative z-3 w-full">
+                            <div class="tov-line-chart w-full"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="wind-container px-4 py-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) h-[95%]">
-                    <p class="font-semibold text-(--weather-main-text)">WIND</p>
-                    <div class="w-c-content mt-5 flex flex-col gap-2 mx-2">
-                        <p class="text-sm">Current Wind</p>
-                        <p class="text-2xl font-semibold">14 km/h</p>
-                        <p class="text-sm">Southwest</p>
-                        <div class="wg mt-3 flex flex-col gap-2">
-                            <p class="text-sm">Wind Gusts</p>
-                            <p class="font-semibold text-xl">22 km/h</p>
+                <div class="wind-container px-4 py-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
+                    <p class="font-semibold text-(--weather-main-text) shrink-0">WIND</p>
+                    <div class="relative shrink-0">
+                        <div class="w-c-content relative mt-5 flex flex-col gap-2 mx-2">
+                            <p class="text-sm">Current Wind</p>
+                            <p class="text-2xl font-semibold">14 km/h</p>
+                            <p class="text-sm">Southwest</p>
+                            <div class="wg mt-3 flex flex-col gap-2">
+                                <p class="text-sm">Wind Gusts</p>
+                                <p class="font-semibold text-xl">22 km/h</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute top-0 right-10 flex justify-self-center">
+                            <svg class="w-55 h-55" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg"><rect  fill="white"/><circle cx="184" cy="163" r="126" fill="none" stroke="#c9d3e6" stroke-width="14"/><circle cx="184" cy="163" r="121" fill="none" stroke="#c9d3e6" stroke-width="1"/><g stroke="#c9d3e6" stroke-width="3" stroke-linecap="round"><line x1="184" y1="59" x2="184" y2="69"/><line x1="257.5" y1="89.5" x2="250.5" y2="96.5"/><line x1="288" y1="163" x2="278" y2="163"/><line x1="257.5" y1="236.5" x2="250.5" y2="229.5"/><line x1="184" y1="267" x2="184" y2="257"/><line x1="110.5" y1="236.5" x2="117.5" y2="229.5"/><line x1="80" y1="163" x2="90" y2="163"/><line x1="110.5" y1="89.5" x2="117.5" y2="96.5"/></g><g fill="#153b68" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="184" y="40">N</text><text x="310" y="163">E</text><text x="184" y="291">S</text><text x="58" y="163">W</text></g><polygon points="184,93 192,163 184,168 176,163" fill="#c9d3e6"/><polygon points="184,233 192,163 184,158 176,163" fill="#c9d3e6"/><g id="direction-arrow" transform="rotate(0 184 163)"><line x1="184" y1="163" x2="184" y2="90" stroke="#1a4fd6" stroke-width="7" stroke-linecap="round"/><polygon points="184,75 175,92 193,92" fill="#1a4fd6"/></g><circle cx="184" cy="163" r="5" fill="#1a4fd6"/></svg>
                         </div>
                     </div>
-                    <div class="wind-graph"></div>
+                    <div class="wind-graph-container flex-1 min-h-0 overflow-hidden">
+                        <canvas id="windGustChart"></canvas>
+                    </div>
                 </div>
 
             </div>
 
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-2 relative h-[60%] min-h-0">
 
-                <div class="air-quality-container">
-                    <p>AIR QUALITY</p>
-                    <div>
+                <div class="air-quality-container px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
+                    <p class="text(--weather-main-text) font-semibold">AIR QUALITY</p>
+                    <div class="mt-5 flex flex-col gap-2">
                         <p>AQI</p>
-                        <p>42</p>
+                        <p class="text-4xl font-bold">42</p>
+                        <div class="flex items-center gap-2">
+                            <div class="level-color w-3 h-3 rounded-full bg-green-500"></div>
+                            <p class="text-green-500 font-semibold">Good</p>
+                        </div>
                     </div>
-                    <div class="a-q-graph"></div>
-                    <div class="a-q-details flex">
-                        <div>
-                            <p>PM2.5</p>
-                            <p>18</p>
-                            <p>Good</p>
+                    <div class="aqi-level relative mt-auto mb-auto">
+                        <div class="relative">
+                            <div class="a-q-line h-2 relative rounded-full bg-[linear-gradient(90deg,#159447_0%,#159447_10%,#D6C916_35%,#FFB000_45%,#F4512C_58%,#D91F55_75%,#4B145C_100%)]"></div>
+                            <div class="w-4 h-4 rounded-full bg-black absolute -top-1 left-1/2"></div>
+                        </div>
+                        <div class="flex justify-between mt-2">
+                            <p class="text-[#159447] text-sm font-semibold">0</p>
+                            <p class="text-[#159447] text-sm font-semibold">50</p>
+                            <p class="text-[#D6C916] text-sm font-semibold">100</p>
+                            <p class="text-[#FFB000] text-sm font-semibold">150</p>
+                            <p class="text-[#F4512C] text-sm font-semibold">200</p>
+                            <p class="text-[#D91F55] text-sm font-semibold">250</p>
+                            <p class="text-[#4B145C] text-sm font-semibold">300+</p>
+                        </div>
+                    </div>
+                    <div class="a-q-details flex justify-between mt-auto mb-auto">
+                        <div class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
+                            <p class="text-base">PM2.5</p>
+                            <p class="font-semibold text-2xl">18</p>
+                            <p class="text-base">Good</p>
                         </div>
 
-                        <div>
-                            <p>PM10</p>
-                            <p>32</p>
-                            <p>Good</p>
+                        <div class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
+                            <p class="text-base">PM10</p>
+                            <p class="font-semibold text-2xl">32</p>
+                            <p class="text-base">Good</p>
                         </div>
 
-                        <div>
-                            <p>NO2</p>
-                            <p>14</p>
-                            <p>Good</p>
+                        <div class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
+                            <p class="text-base">NO2</p>
+                            <p class="font-semibold text-2xl">14</p>
+                            <p class="text-base">Good</p>
                         </div>
 
-                        <div>
-                            <p>O2</p>
-                            <p>28</p>
-                            <p>Good</p>
+                        <div class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
+                            <p class="text-base">O2</p>
+                            <p class="font-semibold text-2xl">28</p>
+                            <p class="text-base">Good</p>
                         </div>
 
-                        <div>
-                            <p>CO</p>
-                            <p>6</p>
-                            <p>Good</p>
+                        <div class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
+                            <p class="text-base">CO</p>
+                            <p class="font-semibold text-2xl">6</p>
+                            <p class="text-base">Good</p>
                         </div>
 
-                        <div>
-                            <p>SO2</p>
-                            <p>5</p>
-                            <p>Good</p>
+                        <div class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
+                            <p class="text-base">SO2</p>
+                            <p class="font-semibold text-2xl">5</p>
+                            <p class="text-base">Good</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="uv-i-container">
+                <div class="uv-i-container px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
                     <p>UV INDEX</p>
                     <div class="flex">
                         <div>
@@ -611,6 +637,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="JS/script.js"></script>
     
 </body>
