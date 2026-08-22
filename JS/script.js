@@ -225,5 +225,95 @@ function windChart() {
         }
     });
 }
-
 windChart();
+
+
+function getAQIInfo(aqi) {
+
+    if (aqi <= 50) {
+        return {
+            status: "Good",
+            color: "#16a34a"
+        };
+    }
+
+    if (aqi <= 100) {
+        return {
+            status: "Moderate",
+            color: "#eab308"
+        };
+    }
+
+    if (aqi <= 150) {
+        return {
+            status: "Unhealthy for Sensitive Groups",
+            color: "#f97316"
+        };
+    }
+
+    if (aqi <= 200) {
+        return {
+            status: "Unhealthy",
+            color: "#ef4444"
+        };
+    }
+
+    if (aqi <= 300) {
+        return {
+            status: "Very Unhealthy",
+            color: "#a855f7"
+        };
+    }
+
+    return {
+        status: "Hazardous",
+        color: "#7e22ce"
+    };
+}
+
+function updateAQI(aqi) {
+    aqi = Math.max(0, Math.min(500, aqi));
+    const info = getAQIInfo(aqi);
+
+    // Update number
+    document.getElementById("aqiValue").textContent = aqi;
+
+    // Update status
+    const status = document.getElementById("status");
+
+    status.style.color = info.color;
+
+    status.querySelector(".status-text").textContent =
+        info.status;
+
+    // Update pointer
+    const pointer = document.getElementById("pointer");
+
+    pointer.style.left = `${(aqi / 500) * 100}%`;
+    pointer.style.setProperty("--pointer-color", info.color);
+}
+updateAQI(80);
+
+
+function setGauge(value) {
+    //Limit value between 0 & 11
+    value = Math.max(0, Math.min(value, 11));
+
+    //value to angle conversion
+    const angle = 180 - (value / 11) * 180;
+
+    const radians = angle * Math.PI / 180;
+
+    //indicatoe length
+    const length = 70;
+
+    const centerX = 160;
+    const centerY = 145;
+
+    const endX = centerX + length * Math.cos(radians);
+    const endY = centerX - length * Math.sin(radians);
+
+    document.getElementById("indicator").setAttribute("x2", endX);
+    document.getElementById("indicator").setAttribute("y2", endY);
+}
+setGauge(6.2);
