@@ -1,0 +1,142 @@
+<svg width="120" height="120" viewBox="0 0 120 120"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="fogBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+
+    <linearGradient id="fog" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="50%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="8" y="8" width="104" height="104"
+        rx="25" fill="url(#fogBg)"/>
+
+  <!-- Faint sun behind fog -->
+  <circle cx="60" cy="43" r="22"
+          fill="#f8fafc"
+          opacity="0.45">
+    <animate
+      attributeName="opacity"
+      values="0.25;0.55;0.25"
+      dur="2.5s"
+      repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Fog layers -->
+  <g fill="none"
+     stroke="url(#fog)"
+     stroke-linecap="round">
+
+    <!-- Upper fog -->
+    <path d="M18 48
+             C28 42 38 42 48 48
+             S68 54 78 48
+             S98 42 105 48"
+          stroke-width="9">
+
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-8 0;8 0;-8 0"
+        dur="2.2s"
+        repeatCount="indefinite"/>
+    </path>
+
+    <!-- Middle fog -->
+    <path d="M10 65
+             C22 58 34 58 46 65
+             S70 72 82 65
+             S101 59 112 65"
+          stroke-width="10">
+
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="8 0;-8 0;8 0"
+        dur="1.8s"
+        repeatCount="indefinite"/>
+    </path>
+
+    <!-- Lower fog -->
+    <path d="M14 83
+             C26 76 38 76 50 83
+             S74 90 86 83
+             S102 77 110 83"
+          stroke-width="9">
+
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="-10 0;10 0;-10 0"
+        dur="2.5s"
+        repeatCount="indefinite"/>
+    </path>
+
+    <!-- Bottom dense fog -->
+    <path d="M8 98
+             C20 91 34 91 47 98
+             S73 105 86 98
+             S103 92 114 98"
+          stroke-width="8"
+          opacity="0.8">
+
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="7 0;-7 0;7 0"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </path>
+
+  </g>
+
+  <!-- Warning badge -->
+  <g>
+    <circle cx="89" cy="30" r="16"
+            fill="#dc2626"
+            stroke="#fff"
+            stroke-width="3">
+
+      <animate
+        attributeName="r"
+        values="16;18;16"
+        dur="1s"
+        repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Exclamation -->
+    <line x1="89" y1="21"
+          x2="89" y2="31"
+          stroke="white"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <circle cx="89" cy="36" r="2"
+            fill="white"/>
+  </g>
+
+  <!-- Visibility fade particles -->
+  <g fill="#64748b">
+    <circle cx="28" cy="36" r="2" opacity="0.5">
+      <animate attributeName="opacity"
+               values="0.2;0.7;0.2"
+               dur="1.5s"
+               repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="73" cy="52" r="2" opacity="0.4">
+      <animate attributeName="opacity"
+               values="0.1;0.6;0.1"
+               dur="1.2s"
+               repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+</svg>
