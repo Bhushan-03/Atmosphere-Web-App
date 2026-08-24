@@ -6,6 +6,16 @@
   --font-inter: "Inter", sans-serif;
 }
 
+@theme {
+  --breakpoint-largDesk: 96rem;
+  --breakpoint-desk: 80rem;
+  --breakpoint-lap: 64rem;
+  --breakpoint-tab: 48rem;
+  --breakpoint-largeMob: 37.5rem;
+  --breakpoint-mob: 23.438rem;
+  --breakpoint-smallMob: 20rem;
+}
+
 .lightTheme {
   --weather-bg: #F5F8FC;
   --weather-navbar: #FFFFFF;

@@ -1,3 +1,13 @@
+function setTheme() {
+    const screenContainer = document.querySelector(".screenContainer");
+    const currentTheme = screenContainer.attributes[1].nodeValue;
+    const selectedTheme = document.querySelectorAll(".selected")[0].innerText;
+    const modes = {"Light Mode" : "lightTheme", "Dark Mode" : "darkTheme"};
+    const themetoset = modes[selectedTheme];
+    screenContainer.classList.remove(currentTheme);
+    screenContainer.classList.add(themetoset);
+    screenContainer.attributes[1].nodeValue = themetoset;
+}
 
 function weatherOptions() {
 
@@ -18,8 +28,8 @@ function weatherOptions() {
 
         options.forEach(option => {
             option.addEventListener("click", () => {
-                console.log(selected[0].innerHTML);
                 selected[0].innerHTML = option.innerHTML;
+                setTheme();
                 select.classList.remove("select-clicked");
                 caret.classList.remove("caret-rotate");
                 menu.classList.remove("menu-open");
@@ -31,8 +41,8 @@ function weatherOptions() {
         });
     });
 }
-
 weatherOptions();
+
 
 function caltempdiff(min, max) {
     let tempDiff = Number(max) - Number(min);

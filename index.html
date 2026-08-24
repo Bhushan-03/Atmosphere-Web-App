@@ -11,65 +11,35 @@
 
 <body class="font-inter transition-all duration-300 ease-in-out">
 
-    <div class="screenContainer relative w-screen h-screen bg-(--weather-bg) grid grid-cols-[20%_80%] lightTheme">
+    <div class="screenContainer relative w-screen h-screen bg-(--weather-bg) grid lap:max-desk:grid-cols-[20%_80%] desk:max-largDesk:grid-cols-[22%_78%] lightTheme" data-themename="lightTheme">
 
-        <div class="sideBar relative w-auto flex flex-col mx-4 my-4 rounded-2xl bg-(--weather-navbar) shadow p-3">
+        <div class="sideBar relative w-auto flex flex-col mx-4 my-4 rounded-2xl bg-(--weather-navbar) shadow p-3 overflow-y-auto scrollbar-none">
 
             <div class="logo flex w-full justify-center items-center space-x-1">
                 <img class="w-10 h-10" src="Assets/Logo/atmosphere web app logo.png" alt="">
-                <p class="text-2xl font-bold">Atmosphere</p>
+                <p class="text-2xl text-(--weather-main-text) font-bold">Atmosphere</p>
             </div>
 
             <div class="option-section-1 flex flex-col items-start space-y-2 w-full mt-5">
                 <button
-                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
-                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 16 16"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="currentColor"
-                            d="M8.641 1.668C6.482 1.67 4.648 2.999 3.771 4.9l-.06.13-.139.01C1.578 5.183 0 6.91 0 9.007 0 11.2 1.716 13 3.838 13h9.285C14.714 13 16 11.65 16 10.012a2.958 2.958 0 0 0-1.805-2.735l-.136-.058-.01-.149c-.136-2.993-2.487-5.4-5.405-5.402zm0 1c2.368.002 4.291 1.952 4.404 4.447v.01l.051.775.703.297a1.944 1.944 0 0 1 1.196 1.815c.01 1.114-.846 1.988-1.871 1.988H3.838c-1.556 0-2.837-1.321-2.837-2.992C1 7.41 2.185 6.142 3.645 6.035l.723-.05.31-.663v-.004c.728-1.58 2.213-2.648 3.961-2.65z"
-                            style="line-height:normal;-inkscape-font-specification:sans-serif;text-indent:0;text-align:start;text-decoration-line:none;text-transform:none;marker:none"
-                            color="#000000" font-weight="400" font-family="sans-serif" overflow="visible" fill="gray" />
-                    </svg>
+                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn)">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.368 12.4048C20.935 11.5606 22 9.9047 22 8C22 5.23858 19.7614 3 17 3C14.2386 3 12 5.23858 12 8M12 8C9.86227 8 8.0094 9.2196 7.09922 11.001C7.06622 11.0003 7.03315 11 7 11C4.23858 11 2 13.2386 2 16C2 18.7614 4.23858 21 7 21C11.2352 21 13.7434 21 17.5 21C19.9853 21 22 18.9853 22 16.5C22 14.0147 19.9853 12 17.5 12C17.4311 12 17.3625 12.0016 17.2943 12.0046C16.6429 9.69375 14.5192 8 12 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     <p class="text-(--weather-main-text)">Weather</p>
                 </button>
                 <button
-                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
-                    <svg class="w-6 h-6 text-(--weather-main-text)" version="1.1" id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 512 512" xml:space="preserve">
-                        <g>
-                            <g>
-                                <path stroke="currentColor"
-                                    d="M422.268,21.113v-2.639C422.268,8.288,413.98,0,403.794,0H382.68c-10.186,0-18.474,8.288-18.474,18.474v2.639h-79.175 v-2.639C285.031,8.288,276.743,0,266.557,0h-21.113c-10.186,0-18.474,8.288-18.474,18.474v2.639h-79.175v-2.639 C147.794,8.288,139.506,0,129.32,0h-21.113C98.02,0,89.732,8.288,89.732,18.474v2.639H0V512h512V21.113H422.268z M380.041,18.474 c0-1.43,1.209-2.639,2.639-2.639h21.113c1.43,0,2.639,1.209,2.639,2.639V63.34h-26.392V18.474z M242.804,18.474 c0-1.43,1.209-2.639,2.639-2.639h21.113c1.43,0,2.639,1.209,2.639,2.639V63.34h-26.392V18.474z M105.567,18.474 c0-1.43,1.209-2.639,2.639-2.639h21.113c1.43,0,2.639,1.209,2.639,2.639V63.34h-26.392V18.474z M496.165,496.165H15.835V163.629 h480.33V496.165z M496.165,147.794H15.835v-26.392h424.907v-15.835H15.835V36.948h73.897v42.227h58.062V36.948h79.175v42.227 h58.062V36.948h79.175v42.227h58.062V36.948h73.897V147.794z" />
-                            </g>
-                        </g>
-                        <g>
-                            <g>
-                                <path stroke="currentColor"
-                                    d="M248.082,184.742v68.619H36.948v221.691h332.536v-63.34h105.567V184.742H248.082z M142.515,459.216H52.784v-47.505h89.732 V459.216z M142.515,395.876H52.784v-58.062h89.732V395.876z M142.515,321.979H52.784v-52.784h89.732V321.979z M248.082,459.216 h-89.732v-47.505h89.732V459.216z M248.082,395.876h-89.732v-58.062h89.732V395.876z M248.082,321.979h-89.732v-52.784h89.732 V321.979z M353.649,459.216h-89.732v-47.505h89.732V459.216z M353.649,395.876h-89.732v-58.062h89.732V395.876z M353.649,321.979 h-89.732v-52.784h89.732V321.979z M353.649,253.361h-89.732v-52.784h89.732V253.361z M459.216,395.876h-89.732v-58.062h89.732 V395.876z M459.216,321.979h-89.732v-52.784h89.732V321.979z M459.216,253.361h-89.732v-52.784h89.732V253.361z" />
-                            </g>
-                        </g>
-                    </svg>
+                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn)">
+    
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9H21M17 13.0014L7 13M10.3333 17.0005L7 17M7 3V5M17 3V5M6.2 21H17.8C18.9201 21 19.4801 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4801 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4801 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4801 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.0799 21 6.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     <p class="text-(--weather-main-text)">Forecast</p>
                 </button>
                 <button
-                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
-                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="currentColor"
-                            d="M30.336 1.329c-0.098-0.050-0.213-0.080-0.335-0.080-0.17 0-0.326 0.057-0.452 0.152l0.002-0.001-7.631 5.723-11.585-5.794c-0.098-0.050-0.213-0.079-0.335-0.079-0.17 0-0.326 0.057-0.452 0.152l0.002-0.001-8 6c-0.183 0.138-0.3 0.355-0.3 0.6v0 22c0 0.001 0 0.001 0 0.002 0 0.413 0.335 0.748 0.748 0.748 0.001 0 0.001 0 0.002 0h-0c0.001 0 0.002 0 0.004 0 0.121 0 0.235-0.030 0.335-0.082l-0.004 0.002 7.722-3.861 11.707 3.902c0.071 0.025 0.152 0.039 0.237 0.039 0.122 0 0.238-0.030 0.339-0.082l-0.004 0.002 8-4c0.247-0.126 0.414-0.378 0.414-0.67v0-24c0-0 0-0 0-0.001 0-0.292-0.167-0.544-0.41-0.668l-0.004-0.002zM9.25 25.537l-6.5 3.25v-20.412l6.5-4.875zM10.75 3.214l10.5 5.251v20.494l-10.5-3.499zM29.25 25.537l-6.5 3.249v-20.411l6.5-4.875z">
-                        </path>
-                    </svg>
+                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn)">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1.125) scale(0.046875)"><path d="M360.439 57.731c-22.739 0-41.239 18.5-41.239 41.239s18.5 41.239 41.239 41.239 41.239-18.5 41.239-41.239-18.5-41.239-41.239-41.239zM360.439 109.792c-5.967 0-10.821-4.855-10.821-10.821s4.855-10.821 10.821-10.821 10.821 4.855 10.821 10.821-4.854 10.821-10.821 10.821zM436.999 131.423c3.01-10.952 4.55-21.82 4.55-32.453 0-44.724-36.386-81.111-81.111-81.111s-81.111 36.386-81.111 81.111c0 10.633 1.54 21.501 4.55 32.453H0v362.717h512V131.423h-75.001zM413.098 181.64c.323-.477.649-.954.967-1.431.423-.632.842-1.27 1.26-1.911.213-.327.427-.655.638-.982.504-.781 1.004-1.569 1.501-2.363.064-.102.127-.204.19-.306 2.552-4.096 5.018-8.363 7.324-12.806h56.603v151.212l-97.046-97.046c4.656-4.663 10.055-10.452 15.638-17.197zM481.582 356.069v27.963L348.493 250.941l13.981-13.981 119.108 119.109zM360.439 48.277c27.952 0 50.693 22.741 50.693 50.693 0 14.642-3.855 28.691-9.603 41.518-1.341 2.996-2.79 5.921-4.313 8.775-.16.299-.321.597-.483.894-.613 1.132-1.24 2.25-1.877 3.356-.159.277-.316.558-.477.833-.767 1.315-1.546 2.613-2.339 3.889-.169.273-.343.537-.513.808-.611.972-1.228 1.934-1.851 2.883-.317.484-.638.963-.958 1.441-.49.731-.982 1.452-1.478 2.168-.349.504-.696 1.011-1.046 1.507-.559.791-1.12 1.565-1.682 2.336-.623.854-1.246 1.693-1.873 2.523-.355.47-.71.943-1.065 1.406-.497.647-.993 1.283-1.489 1.913-.288.366-.575.727-.862 1.087-.534.67-1.07 1.339-1.602 1.99-.046.056-.091.109-.137.165-1.303 1.591-2.597 3.122-3.872 4.593-.07.08-.14.163-.21.244-.618.712-1.232 1.406-1.84 2.089-.109.123-.218.244-.328.366-2.603 2.907-5.097 5.54-7.39 7.866-.029.029-.059.059-.087.089-1.161 1.176-2.27 2.275-3.315 3.29-8.915-8.656-22.454-23.318-33.3-41.568-.134-.226-.272-.446-.405-.674-.365-.622-.721-1.256-1.079-1.886-.444-.782-.886-1.568-1.319-2.362-.259-.474-.516-.949-.771-1.427-.659-1.241-1.308-2.491-1.937-3.76-.042-.084-.085-.167-.128-.252-.741-1.505-1.458-3.031-2.149-4.573-5.752-12.831-9.609-26.885-9.609-41.531 0-27.952 22.741-50.693 50.693-50.693zM295.9 161.84c2.308 4.443 4.773 8.709 7.324 12.806.064.102.127.204.19.306.497.795.997 1.583 1.501 2.363.211.328.424.655.638.982.419.641.837 1.28 1.26 1.911.318.478.644.954.967 1.431.349.513.698 1.028 1.048 1.534.413.596.834 1.191 1.255 1.786.284.401.566.805.851 1.201.47.655.951 1.309 1.432 1.963.251.343.503.69.754 1.03.413.556.835 1.11 1.256 1.665.335.442.669.89 1.005 1.326.019.025.039.052.058.077.601.781 1.203 1.549 1.803 2.309.306.388.612.769.919 1.152.321.401.642.801.963 1.196.372.458.742.916 1.113 1.366.156.191.312.376.468.565 6.42 7.756 12.599 14.25 17.683 19.223L223.251 333.167 118.413 228.328l66.488-66.488H295.9zM141.886 161.84l-44.98 44.98-44.981-44.98h89.961zM30.417 463.724v-91.047c47.038 6.702 84.344 44.008 91.046 91.047H30.417zM152.119 463.723c-7.043-63.832-57.87-114.659-121.701-121.702v-20.386c75.023 7.198 134.891 67.065 142.088 142.088h-20.387zM203.042 463.723c-7.367-91.808-80.817-165.258-172.625-172.625v-107.75l280.374 280.375H203.042zM481.583 463.723H353.807L244.759 354.675l82.226-82.226 154.598 154.598v36.676z"/></g></svg>
                     <p class="text-(--weather-main-text)">Maps</p>
                 </button>
                 <button
-                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme">
-                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 32 32" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="currentColor"
-                            d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z">
-                        </path>
-                    </svg>
+                    class="flex items-center space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn)">
+                    <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(2.74 0) scale(0.575)" d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z"/></svg>
                     <p class="text-(--weather-main-text)">Saved Locations</p>
                 </button>
             </div>
@@ -131,7 +101,7 @@
 
             <div class="about-option w-[90%] absolute bottom-2">
                 <button
-                    class="space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) lightTheme flex relative">
+                    class="space-x-2 w-full px-2.5 py-3 rounded-xl hover:bg-(--weather-hover-btn) flex relative">
                     <svg class="w-6 h-6 text-(--weather-main-text)" viewBox="0 0 512 512" version="1.1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -150,7 +120,7 @@
 
         <div class="mainScreen w-auto relative overflow-y-scroll scrollbar-none">
 
-            <div class="header flex w-auto h-[8%] justify-between items-center mx-3 mt-2">
+            <div class="header relative flex w-auto h-[8%] justify-between items-center mx-3 mt-2 desk:max-largDesk:mt-4">
 
                 <div class="searchBar w-2/4 rounded-2xl relative">
                     <svg class="w-7 h-7 absolute left-1 top-2.5 text-(--weather-icons)" viewBox="0 -0.5 25 25"
@@ -179,7 +149,7 @@
 
                 <div class="dropdown w-[17%] relative mr-2">
                     <div
-                        class="select relative bg-(--weather-cards) flex justify-between items-center rounded-xl shadow-[0_0_0.2em_#26489a] px-3 py-2 cursor-pointer transition-[background_0.3s] active:border-[2px_#26489a_solid] active:shadow-[0_0_0.8em_#26489a] hover:bg-(--weather-hover-btn) space-x-2">
+                        class="select relative bg-(--weather-cards) flex justify-between items-center rounded-xl shadow-[0_0_0.2em_#26489a] px-3 py-2 cursor-pointer transition-[background_0.3s] active:border-[2px_#26489a_solid] active:shadow-[0_0_0.8em_#26489a] hover:bg-(--weather-hover-btn) space-x-2 desk:max-largDesk:w-full">
                         <span class="selected flex space-x-2 items-center">
                             <svg class="w-6 h-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512">
@@ -222,7 +192,7 @@
                                     <path d="M109.515 109.515L81.131 81.131" />
                                 </g>
                             </svg>
-                            <p class="font-semibold text-(--weather-main-text)">Dynamic Mode</p>
+                            <p class="font-semibold text-(--weather-main-text) text-nowrap">Dynamic Mode</p>
                         </span>
                         <div class="caret transition-[0.3s]">
                             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -275,7 +245,7 @@
                                     <path d="M109.515 109.515L81.131 81.131" />
                                 </g>
                             </svg>
-                            <p class="font-semibold text-(--weather-main-text)">Dynamic Mode</p>
+                            <p class="font-semibold text-(--weather-main-text) text-nowrap">Dynamic Mode</p>
                         </li>
                         <li
                             class="flex space-x-2 items-center px-[0.7em] py-[0.5em] m-[0.3em] rounded-xl cursor-pointer hover:bg-(--weather-primary-btn)">
@@ -292,7 +262,7 @@
                                 <path stroke="url(#lightThemeGradient)" stroke-linecap="round" stroke-linejoin="round"
                                     d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
                             </svg>
-                            <p class="font-semibold text-(--weather-main-text)">Light Mode</p>
+                            <p class="font-semibold text-(--weather-main-text) text-nowrap">Light Mode</p>
                         </li>
                         <li
                             class="flex space-x-2 items-center px-[0.7em] py-[0.5em] m-[0.3em] rounded-xl cursor-pointer hover:bg-(--weather-primary-btn)">
@@ -317,14 +287,14 @@
                                         height="5.657" />
                                 </g>
                             </svg>
-                            <p class="font-semibold text-(--weather-main-text)">Dark Mode</p>
+                            <p class="font-semibold text-(--weather-main-text) text-nowrap">Dark Mode</p>
                         </li>
                     </ul>
                 </div>
 
             </div>
 
-            <div class="weather-Main-Card w-auto h-[40%] bg-sky-500 mt-5 mx-3 my-2 rounded-2xl relative">
+            <div class="weather-Main-Card w-auto h-[40%] bg-[url('/Assets/staticbg/partlycloudy.png')] bg-cover bg-center mt-5 mx-3 my-2 rounded-2xl relative desk:max-largDesk:h-1/2">
 
                 <div class="clw-info w-full h-full relative">
 
@@ -540,7 +510,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 mt-4 relative h-[75%]">
+            <div class="grid grid-cols-2 mt-4 relative h-[75%] desk:max-largDesk:h-full">
 
                 <div
                     class="10d-fc-container px-4 py-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) h-[95%]">
