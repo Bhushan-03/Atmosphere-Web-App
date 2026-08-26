@@ -10,6 +10,7 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-400: oklch(70.4% 0.191 22.216);
+    --color-red-700: oklch(50.5% 0.213 27.518);
     --color-orange-300: oklch(83.7% 0.128 66.29);
     --color-slate-300: oklch(86.9% 0.022 252.894);
     --spacing: 0.25rem;
@@ -217,6 +218,9 @@
   .top-\[3em\] {
     top: 3em;
   }
+  .top-\[25\%\] {
+    top: 25%;
+  }
   .top-\[30\%\] {
     top: 30%;
   }
@@ -292,6 +296,9 @@
   .my-2 {
     margin-block: calc(var(--spacing) * 2);
   }
+  .my-3 {
+    margin-block: calc(var(--spacing) * 3);
+  }
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
@@ -355,6 +362,9 @@
   .mb-auto {
     margin-bottom: auto;
   }
+  .ml-3 {
+    margin-left: calc(var(--spacing) * 3);
+  }
   .ml-auto {
     margin-left: auto;
   }
@@ -375,6 +385,9 @@
   }
   .h-1 {
     height: var(--spacing);
+  }
+  .h-1\/2 {
+    height: calc(1 / 2 * 100%);
   }
   .h-2 {
     height: calc(var(--spacing) * 2);
@@ -424,8 +437,8 @@
   .h-\[8\%\] {
     height: 8%;
   }
-  .h-\[40\%\] {
-    height: 40%;
+  .h-\[10\%\] {
+    height: 10%;
   }
   .h-\[50\%\] {
     height: 50%;
@@ -436,14 +449,29 @@
   .h-\[60\%\] {
     height: 60%;
   }
+  .h-\[60\] {
+    height: 60;
+  }
+  .h-\[65\%\] {
+    height: 65%;
+  }
+  .h-\[70\%\] {
+    height: 70%;
+  }
   .h-\[75\%\] {
     height: 75%;
+  }
+  .h-\[80\%\] {
+    height: 80%;
   }
   .h-\[90\%\] {
     height: 90%;
   }
   .h-\[95\%\] {
     height: 95%;
+  }
+  .h-\[100\%\] {
+    height: 100%;
   }
   .h-auto {
     height: auto;
@@ -718,6 +746,9 @@
   .border-\[1px_solid_rgba\(255\,255\,255\,0\.3\)\] {
     border-color: 1px solid rgba(255,255,255,0.3);
   }
+  .border-red-700 {
+    border-color: var(--color-red-700);
+  }
   .bg-\(--pointer-color\) {
     background-color: var(--pointer-color);
   }
@@ -796,6 +827,9 @@
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
+  .py-5 {
+    padding-block: calc(var(--spacing) * 5);
+  }
   .py-\[0\.5em\] {
     padding-block: 0.5em;
   }
@@ -804,6 +838,9 @@
   }
   .pt-5 {
     padding-top: calc(var(--spacing) * 5);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
   }
   .pb-9 {
     padding-bottom: calc(var(--spacing) * 9);
@@ -1128,87 +1165,206 @@
   }
   @media (width >= 64rem) {
     @media (width < 80rem) {
-      .lap\:max-desk\:grid {
-        display: grid;
-      }
       .lap\:max-desk\:grid-cols-\[20\%_80\%\] {
         grid-template-columns: 20% 80%;
       }
     }
-    @media (width < 64rem) {
-      .lap\:max-lap\:grid {
-        display: grid;
-      }
-    }
   }
   @media (width >= 80rem) {
-    .desk\:grid {
-      display: grid;
-    }
     @media (width < 96rem) {
-      .desk\:max-largDesk\:mt-2 {
-        margin-top: calc(var(--spacing) * 2);
-      }
-      .desk\:max-largDesk\:mt-3\.5 {
-        margin-top: calc(var(--spacing) * 3.5);
-      }
       .desk\:max-largDesk\:mt-4 {
         margin-top: calc(var(--spacing) * 4);
-      }
-      .desk\:max-largDesk\:mt-5 {
-        margin-top: calc(var(--spacing) * 5);
-      }
-      .desk\:max-largDesk\:grid {
-        display: grid;
       }
       .desk\:max-largDesk\:h-1\/2 {
         height: calc(1 / 2 * 100%);
       }
-      .desk\:max-largDesk\:h-\[75\%\] {
-        height: 75%;
-      }
       .desk\:max-largDesk\:h-full {
         height: 100%;
-      }
-      .desk\:max-largDesk\:w-\[10\%\] {
-        width: 10%;
-      }
-      .desk\:max-largDesk\:w-\[50\%\] {
-        width: 50%;
       }
       .desk\:max-largDesk\:w-full {
         width: 100%;
       }
-      .desk\:max-largDesk\:grid-cols-\[22\%_75\%\] {
-        grid-template-columns: 22% 75%;
-      }
       .desk\:max-largDesk\:grid-cols-\[22\%_78\%\] {
         grid-template-columns: 22% 78%;
       }
-      .desk\:max-largDesk\:grid-cols-\[25\%\] {
-        grid-template-columns: 25%;
-      }
-      .desk\:max-largDesk\:grid-cols-\[25\%_75\%\] {
-        grid-template-columns: 25% 75%;
-      }
-      .desk\:max-largDesk\:grid-cols-\[25\%_75\] {
-        grid-template-columns: 25% 75;
-      }
-      .desk\:max-largDesk\:grid-cols-\[25\%_\] {
-        grid-template-columns: 25% ;
-      }
-    }
-    @media (width < 64rem) {
-      .desk\:max-lap\:grid {
-        display: grid;
-      }
-    }
-    @media (width >= 64rem) {
-      .desk\:lap\:grid {
-        display: grid;
-      }
     }
   }
+}
+.dynamicThemeSunny {
+  --weather-bg: #DFF3FF;
+  --weather-navbar: #FFFFFF;
+  --weather-cards: #FFFFFF;
+  --weather-card-overlay: #F0F9FF;
+  --weather-main-text: #102A43;
+  --weather-normal-text: #486581;
+  --weather-muted-text: #829AB1;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #BAE6FD;
+  --weather-primary-btn: #0284C7;
+  --weather-hover-btn: #0369A1;
+  --weather-icons: #FBBF24;
+  --weather-active-icons: #0284C7;
+  --weather-links: #0284C7;
+}
+.dynamicThemePartlyCloudy {
+  --weather-bg: #DCEEFF;
+  --weather-navbar: #FFFFFF;
+  --weather-cards: #FFFFFF;
+  --weather-card-overlay: #EEF7FF;
+  --weather-main-text: #172B4D;
+  --weather-normal-text: #52677D;
+  --weather-muted-text: #7B8FA3;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #C7DDF0;
+  --weather-primary-btn: #3B82F6;
+  --weather-hover-btn: #2563EB;
+  --weather-icons: #FBBF24;
+  --weather-active-icons: #3B82F6;
+  --weather-links: #2563EB;
+}
+.dynamicThemeCloudy {
+  --weather-bg: #E2E8F0;
+  --weather-navbar: #F8FAFC;
+  --weather-cards: #F8FAFC;
+  --weather-card-overlay: #F1F5F9;
+  --weather-main-text: #1E293B;
+  --weather-normal-text: #64748B;
+  --weather-muted-text: #94A3B8;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #CBD5E1;
+  --weather-primary-btn: #64748B;
+  --weather-hover-btn: #475569;
+  --weather-icons: #64748B;
+  --weather-active-icons: #3B82F6;
+  --weather-links: #475569;
+}
+.dynamicThemeRain {
+  --weather-bg: #334155;
+  --weather-navbar: #1E293B;
+  --weather-cards: #26364A;
+  --weather-card-overlay: #30445B;
+  --weather-main-text: #F8FAFC;
+  --weather-normal-text: #CBD5E1;
+  --weather-muted-text: #94A3B8;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #475569;
+  --weather-primary-btn: #38BDF8;
+  --weather-hover-btn: #0EA5E9;
+  --weather-icons: #60A5FA;
+  --weather-active-icons: #38BDF8;
+  --weather-links: #38BDF8;
+}
+.dynamicThemeThunderstorm {
+  --weather-bg: #111827;
+  --weather-navbar: #030712;
+  --weather-cards: #182338;
+  --weather-card-overlay: #24324A;
+  --weather-main-text: #F8FAFC;
+  --weather-normal-text: #CBD5E1;
+  --weather-muted-text: #94A3B8;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #334155;
+  --weather-primary-btn: #6366F1;
+  --weather-hover-btn: #4F46E5;
+  --weather-icons: #818CF8;
+  --weather-active-icons: #FDE047;
+  --weather-links: #818CF8;
+}
+.dynamicThemeFogMist {
+  --weather-bg: #E8EEF0;
+  --weather-navbar: #F8FAFA;
+  --weather-cards: #F8FAFA;
+  --weather-card-overlay: #F1F5F4;
+  --weather-main-text: #263238;
+  --weather-normal-text: #607078;
+  --weather-muted-text: #8A9A9F;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #CBD5D8;
+  --weather-primary-btn: #64748B;
+  --weather-hover-btn: #475569;
+  --weather-icons: #94A3B8;
+  --weather-active-icons: #64748B;
+  --weather-links: #64748B;
+}
+.dynamicThemeSnow {
+  --weather-bg: #E0F2FE;
+  --weather-navbar: #FFFFFF;
+  --weather-cards: #FFFFFF;
+  --weather-card-overlay: #F0F9FF;
+  --weather-main-text: #0F172A;
+  --weather-normal-text: #64748B;
+  --weather-muted-text: #94A3B8;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #BAE6FD;
+  --weather-primary-btn: #0284C7;
+  --weather-hover-btn: #0369A1;
+  --weather-icons: #7DD3FC;
+  --weather-active-icons: #0284C7;
+  --weather-links: #0284C7;
+}
+.dynamicThemeClearNight {
+  --weather-bg: #0F172A;
+  --weather-navbar: #020617;
+  --weather-cards: #162033;
+  --weather-card-overlay: #1E2A44;
+  --weather-main-text: #F8FAFC;
+  --weather-normal-text: #CBD5E1;
+  --weather-muted-text: #94A3B8;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #273449;
+  --weather-primary-btn: #818CF8;
+  --weather-hover-btn: #6366F1;
+  --weather-icons: #F8FAFC;
+  --weather-active-icons: #818CF8;
+  --weather-links: #A5B4FC;
+}
+.dynamicThemeCloudyNight {
+  --weather-bg: #172033;
+  --weather-navbar: #0B1220;
+  --weather-cards: #1E293B;
+  --weather-card-overlay: #273449;
+  --weather-main-text: #F8FAFC;
+  --weather-normal-text: #CBD5E1;
+  --weather-muted-text: #94A3B8;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #334155;
+  --weather-primary-btn: #818CF8;
+  --weather-hover-btn: #6366F1;
+  --weather-icons: #94A3B8;
+  --weather-active-icons: #818CF8;
+  --weather-links: #A5B4FC;
+}
+.dynamicThemeSunrise {
+  --weather-bg: #FDBA74;
+  --weather-navbar: #FFF7ED;
+  --weather-cards: #FFFFFF;
+  --weather-card-overlay: #FFF7ED;
+  --weather-main-text: #431407;
+  --weather-normal-text: #7C2D12;
+  --weather-muted-text: #9A3412;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #FED7AA;
+  --weather-primary-btn: #F97316;
+  --weather-hover-btn: #EA580C;
+  --weather-icons: #F59E0B;
+  --weather-active-icons: #F97316;
+  --weather-links: #EA580C;
+}
+.dynamicThemeSunset {
+  --weather-bg: #FB7185;
+  --weather-navbar: #FFF1F2;
+  --weather-cards: #FFFFFF;
+  --weather-card-overlay: #FFF1F2;
+  --weather-main-text: #4C0519;
+  --weather-normal-text: #881337;
+  --weather-muted-text: #9F1239;
+  --weather-text-white: #FFFFFF;
+  --weather-border: #FECDD3;
+  --weather-primary-btn: #E11D48;
+  --weather-hover-btn: #BE123C;
+  --weather-icons: #F97316;
+  --weather-active-icons: #E11D48;
+  --weather-links: #BE123C;
 }
 .lightTheme {
   --weather-bg: #F5F8FC;
@@ -1236,6 +1392,7 @@
   --weather-border: #28384D;
   --weather-primary-btn: #60A5FA;
   --weather-hover-btn: #93C5FD;
+  --weather-icons: #172033;
   --weather-active-icons: #60A5FA;
   --weather-links: #2563EB;
 }

@@ -11,9 +11,9 @@
 
 <body class="font-inter transition-all duration-300 ease-in-out">
 
-    <div class="screenContainer relative w-screen h-screen bg-(--weather-bg) grid lap:max-desk:grid-cols-[20%_80%] desk:max-largDesk:grid-cols-[22%_78%] lightTheme" data-themename="lightTheme">
+    <div class="screenContainer relative w-screen h-screen bg-(--weather-bg) grid grid-cols-[20%_80%] lap:max-desk:grid-cols-[20%_80%] desk:max-largDesk:grid-cols-[22%_78%] lightTheme" data-themename="lightTheme">
 
-        <div class="sideBar relative w-auto flex flex-col mx-4 my-4 rounded-2xl bg-(--weather-navbar) shadow p-3 overflow-y-auto scrollbar-none">
+        <div class="sideBar relative w-auto h-[95%] self-center flex flex-col rounded-2xl bg-(--weather-navbar) shadow p-3 ml-3 overflow-y-auto scrollbar-none">
 
             <div class="logo flex w-full justify-center items-center space-x-1">
                 <img class="w-10 h-10" src="Assets/Logo/atmosphere web app logo.png" alt="">
@@ -118,9 +118,9 @@
 
         </div>
 
-        <div class="mainScreen w-auto relative overflow-y-scroll scrollbar-none">
+        <div class="mainScreen relative w-auto h-[95%] self-center flex flex-col mx-4 rounded-2xl bg-(--weather-navbar) shadow p-3 overflow-y-scroll scrollbar-none">
 
-            <div class="header relative flex w-auto h-[8%] justify-between items-center mx-3 mt-2 desk:max-largDesk:mt-4">
+            <div class="header relative flex w-auto h-[8%] justify-between items-center mx-3 desk:max-largDesk:mt-4">
 
                 <div class="searchBar w-2/4 rounded-2xl relative">
                     <svg class="w-7 h-7 absolute left-1 top-2.5 text-(--weather-icons)" viewBox="0 -0.5 25 25"
@@ -131,7 +131,7 @@
                         <path stroke="currentColor" d="M17.029 16.5295L19.5 19.0005" stroke="#000000" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <input class="w-full shadow p-3 pl-10 rounded-2xl bg-(--weather-navbar)" type="text"
+                    <input class="searchedCity w-full shadow p-3 pl-10 rounded-2xl bg-(--weather-navbar)" type="text"
                         placeholder="Search for a city or place...">
                 </div>
 
@@ -294,7 +294,7 @@
 
             </div>
 
-            <div class="weather-Main-Card w-auto h-[40%] bg-[url('/Assets/staticbg/partlycloudy.png')] bg-cover bg-center mt-5 mx-3 my-2 rounded-2xl relative desk:max-largDesk:h-1/2">
+            <div class="weather-Main-Card w-auto h-full py-3 bg-[url('/Assets/staticbg/partlycloudy.png')] bg-cover bg-center mt-5 mx-3 my-2 rounded-2xl relative desk:max-largDesk:h-1/2">
 
                 <div class="clw-info w-full h-full relative">
 
@@ -366,7 +366,7 @@
                     </div>
 
                     <div
-                        class="clwd absolute text-(--weather-text-white) w-[23%] h-auto border right-10 px-4 py-4 rounded-3xl space-y-5 flex flex-col justify-center top-[30%] bg-[rgba(255, 255, 255, 0.2)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm border-[1px_solid_rgba(255,255,255,0.3)] space-y-4">
+                        class="clwd absolute text-(--weather-text-white) w-[23%] h-auto border right-10 px-4 py-4 rounded-3xl space-y-5 flex flex-col justify-center top-[25%] bg-[rgba(255, 255, 255, 0.2)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm border-[1px_solid_rgba(255,255,255,0.3)] space-y-4">
                         <div class="clwd-humidity flex justify-between">
                             <div class="flex space-x-3">
                                 <svg class="w-6 h-6 text-(--weather-text-white)" xmlns="http://www.w3.org/2000/svg"
@@ -510,7 +510,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 mt-4 relative h-[75%] desk:max-largDesk:h-full">
+            <div class="grid grid-cols-2 relative h-full desk:max-largDesk:h-full">
 
                 <div
                     class="10d-fc-container px-4 py-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) h-[95%]">
@@ -891,7 +891,7 @@
 
             </div>
 
-            <div class="grid grid-cols-2 relative h-[60%] min-h-0">
+            <div class="grid grid-cols-2 relative h-full desk:max-largDesk:h-full">
 
                 <div
                     class="temp-ov-container px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
@@ -957,9 +957,9 @@
 
             </div>
 
-            <div class="grid grid-cols-2 relative h-[60%] min-h-0">
+            <div class="grid grid-cols-2 relative h-full desk:max-largDesk:h-full">
 
-                <div class="aqi-card px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
+                <div class="aqi-card px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col pb-2">
                     <p class="text(--weather-main-text) font-semibold">AIR QUALITY</p>
                     <div class="mt-5 flex flex-col gap-2">
                         <p>AQI</p>
@@ -1075,7 +1075,7 @@
 
             </div>
 
-            <div class="grid grid-cols-2 relative h-[50%] min-h-0">
+            <div class="grid grid-cols-2 relative h-full desk:max-largDesk:h-full">
 
                 <div class="rise-set-container px-4 pt-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) box-border min-h-0 flex flex-col">
                     <p class="text(--weather-main-text) font-semibold">SUNRISE & SUNSET</p>

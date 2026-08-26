@@ -26,7 +26,7 @@ async function getWeather(lat,lon) {
             throw new Error(`Response status: ${response.status}`);
         }
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
         return result;
     }
     catch (error) {
@@ -129,11 +129,8 @@ async function main() {
     const lat = apiResponse.results[0].latitude;
     const lon = apiResponse.results[0].longitude;
     const weatherData = await getWeather(lat, lon);
-
     const cwData = await getCurrentWeather(weatherData);
-
     const wagData = await getWAG(weatherData, cwData);
-
     // return weatherData["daily"];
     return Object.fromEntries(wagData);
 }
@@ -141,6 +138,5 @@ async function main() {
 app.get("/", async (req,res) => {
     const cWeather = await main();
     res.json(cWeather);
-})
-
+});
 app.listen(port);

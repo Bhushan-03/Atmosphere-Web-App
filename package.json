@@ -13,6 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "ejs": "^6.0.1",
     "express": "^4.22.2",
     "tailwindcss": "^4.3.3"
   },
