@@ -717,79 +717,83 @@
 
                 <div class="w-a-g-container px-4 py-4 rounded-2xl mx-3 my-2 relative shadow bg-(--weather-cards) h-[95%]">
                     <p class="font-semibold text-(--weather-main-text)">WEATHER AT A GLANCE</p>
-                    <div class="grid grid-cols-3 grid-rows-3 gap-3 mt-6 h-[88%] w-full items-center">
+                    <div class="grid grid-cols-3 grid-rows-3 gap-3 mt-6 h-[88%] w-full items-center lap:max-desk:h-[85%]">
 
-                        <div class="w-a-g-humidity flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/humidity.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-humidity flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/humidity.png" alt="">
+                            <div class="flex flex-col gap-2 lap:max-desk:gap-0 items-center">
                                 <p>Humidity</p>
-                                <p class="flex justify-self-center font-semibold text-xl">78%</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">78%</p>
                             </div>
                         </div>
 
-                        <div class="w-a-g-wind flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/wind.png" alt="">
-                            <div class="flex flex-col gap-2 items-center flex-wrap">
+                        <div class="w-a-g-wind flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/wind.png" alt="">
+                            <div class="flex flex-col gap-2 lap:max-desk:gap-0 items-center flex-wrap">
                                 <p>Wind</p>
-                                <p class="flex justify-self-center font-semibold text-xl text-wrap">14 km/h</p>
-                                <p class="flex justify-self-center font-semibold text-xl text-wrap">SW</p>
+                                <div class="flex flex-col items-center">
+                                    <p class="flex justify-self-center font-semibold text-xl text-wrap lap:max-desk:text-lg">14 km/h</p>
+                                    <p class="flex justify-self-center font-semibold text-xl text-wrap lap:max-desk:hidden">SW</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="w-a-g-precipitation flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/precipiation.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-precipitation flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/precipiation.png" alt="">
+                            <div class="flex flex-col gap-2 items-center lap:max-desk:gap-0">
                                 <p>Precipiation</p>
-                                <p class="flex justify-self-center font-semibold text-xl">62%</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">62%</p>
                             </div>
                         </div>
 
-                        <div class="w-a-g-uvIndex flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/uv-index.png" alt="">
+                        <div class="w-a-g-uvIndex flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/uv-index.png" alt="">
                             <div class="flex flex-col gap-2 items-center">
-                                <p>UV Index</p>
-                                <p class="flex justify-self-center font-semibold text-xl">6.2</p>
-                                <p>Moderate</p>
+                                <div class="flex flex-col items-center lap:max-desk:gap-0">
+                                    <p>UV Index</p>
+                                    <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">6.2</p>
+                                    <p class="lap:max-desk:hidden">Moderate</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="w-a-g-visibility flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/visibility.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-visibility flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/visibility.png" alt="">
+                            <div class="flex flex-col gap-2 items-center lap:max-desk:gap-0">
                                 <p>Visibility</p>
-                                <p class="flex justify-self-center font-semibold text-xl">8.4 km</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">8.4 km</p>
                             </div>
                         </div>
 
-                        <div class="w-a-g-cloud-cover flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/cloud-cover.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-cloud-cover flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/cloud-cover.png" alt="">
+                            <div class="flex flex-col gap-2 items-center lap:max-desk:gap-0">
                                 <p>Cloud Cover</p>
-                                <p class="flex justify-self-center font-semibold text-xl">62%</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">62%</p>
                             </div>
                         </div>
 
-                        <div class="w-a-g-sunrise flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/sunrise.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-sunrise flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/sunrise.png" alt="">
+                            <div class="flex flex-col gap-2 items-center lap:max-desk:gap-0">
                                 <p>Sunrise</p>
-                                <p class="flex justify-self-center font-semibold text-xl">6:12 AM</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">6:12 AM</p>
                             </div>
                         </div>
 
-                        <div class="w-a-g-sunset flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/sunset.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-sunset flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/sunset.png" alt="">
+                            <div class="flex flex-col gap-2 items-center lap:max-desk:gap-0">
                                 <p>Sunset</p>
-                                <p class="flex justify-self-center font-semibold text-xl">6:58 PM</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">6:58 PM</p>
                             </div>
                         </div>
 
-                        <div class="w-a-g-pressure flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center">
-                            <img class="w-10 h-10" src="Assets/pressure.png" alt="">
-                            <div class="flex flex-col gap-2 items-center">
+                        <div class="w-a-g-pressure flex justify-self-center shadow border border-(--weather-active-icons) rounded-xl w-[90%] h-full items-center gap-2 justify-center lap:max-desk:grid lap:max-desk:grid-rows-[1fr_1.5fr] lap:max-desk:gap-0 lap:max-desk:w-full">
+                            <img class="w-10 h-10 lap:max-desk:mt-auto lap:max-desk:justify-self-center" src="Assets/pressure.png" alt="">
+                            <div class="flex flex-col gap-2 items-center lap:max-desk:gap-0">
                                 <p>Pressure</p>
-                                <p class="flex justify-self-center font-semibold text-xl">1008 hPa</p>
+                                <p class="flex justify-self-center font-semibold text-xl lap:max-desk:text-lg">1008 hPa</p>
                             </div>
                         </div>
                     </div>
