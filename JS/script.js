@@ -1,8 +1,45 @@
+function getDynamicTheme(weatherCondition) {
+    if (weatherCondition === "Sunny") {
+        return "dynamicThemeSunny";
+    } 
+    else if (weatherCondition === "Partly Cloudy") {
+        return "dynamicThemePartlyCloudy";
+    }
+    else if (weatherCondition === "Cloudy") {
+        return "dynamicThemeCloudy";
+    }
+    else if (weatherCondition === "Rainy") {
+        return "dynamicThemeRain";
+    }
+    else if (weatherCondition === "Thunderstorm") {
+        return "dynamicThemeThunderstorm";
+    }
+    else if (weatherCondition === "Fog") {
+        return "dynamicThemeFogMist";
+    }
+    else if (weatherCondition === "Snow") {
+        return "dynamicThemeSnow";
+    }
+    else if (weatherCondition === "Clear Night") {
+        return "dynamicThemeClearNight";
+    }
+    else if (weatherCondition === "Cloudy Night") {
+        return "dynamicThemeCloudyNight";
+    }
+    else if (weatherCondition === "Sunrise") {
+        return "dynamicThemeSunrise";
+    }
+    else if (weatherCondition === "Sunset") {
+        return "dynamicThemeSunset";
+    }
+}
+
 function setTheme() {
+    const dnTheme = getDynamicTheme("Clear Night");
     const screenContainer = document.querySelector(".screenContainer");
     const currentTheme = screenContainer.attributes[1].nodeValue;
     const selectedTheme = document.querySelectorAll(".selected")[0].innerText;
-    const modes = {"Light Mode" : "lightTheme", "Dark Mode" : "darkTheme"};
+    const modes = {"Light Mode" : "lightTheme", "Dark Mode" : "darkTheme", "Dynamic Mode" : dnTheme};
     const themetoset = modes[selectedTheme];
     screenContainer.classList.remove(currentTheme);
     screenContainer.classList.add(themetoset);
@@ -37,11 +74,34 @@ function weatherOptions() {
                     option.classList.remove("active");
                 });
                 option.classList.toggle("active");
+                if (window.innerWidth < 1024) {
+                    selected[0].childNodes[3].classList.toggle("hidden");
+                } 
             });
         });
     });
 }
 weatherOptions();
+
+
+function showSideBar() {
+    const hamBtn = document.querySelector(".hamburgurBtn");
+    const crossBtn = document.querySelector(".crossBtn");
+    const sideBar = document.querySelector(".sideBar");
+    hamBtn.addEventListener("click", () => {
+        sideBar.style.left = "0";
+        sideBar.style.opacity = "100%";
+        console.log("Hamburgur Clicked");
+    });
+
+    crossBtn.addEventListener("click", () => {
+        sideBar.style.left = "-200px";
+        sideBar.style.opacity = "0";
+        console.log("Cross Clicked");
+    });
+}
+showSideBar();
+
 
 
 function caltempdiff(min, max) {
