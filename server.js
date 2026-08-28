@@ -2,6 +2,15 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+const cors = require('cors');
+const corsOptions = {
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+};
+app.use(cors(corsOptions));
+
+
 async function getCoordinates(city) {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`;
 
@@ -44,17 +53,30 @@ async function getPrecipitation(data) {
     return (data["current"]["precipitation"] * 100);
 }
 
+async function getWCTheme(data) {
+    const weatherCode = data["current"]["weather_code"];
+    if (weatherCode === 0) return "Clear Sky";
+    if (weatherCode === 1) return "Partly Cloudy";
+    if ([2, 3].includes(weatherCode)) return "Cloudy";
+    if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(weatherCode)) return "Rainy";
+    if ([95, 96, 99].includes(weatherCode)) return "Thunderstorm";
+    if ([45, 48].includes(weatherCode)) return "Fog";
+    if ([71, 73, 75, 77, 85, 86].includes(weatherCode)) return "Snow";
+    return "Unknown";
+}
+
 async function getWeatherCondition(data) {
-    if (data["current"]["weather_code"] === 0) return "Clear Sky";
-    if ([1,2,3].includes(data["current"]["weather_code"])) return "Cloudy";
-    if ([45,48].includes(data["current"]["weather_code"])) return "Fog";
-    if ([51, 53, 55].includes(data["current"]["weather_code"])) return "Drizzle";
-    if ([56, 57].includes(data["current"]["weather_code"])) return "Freezing drizzle";
-    if ([61, 63, 65].includes(data["current"]["weather_code"])) return "Rain";
-    if ([66, 67].includes(data["current"]["weather_code"])) return "Freezing rain";
-    if ([71, 73, 75, 77].includes(data["current"]["weather_code"])) return "Snow";
-    if ([80, 81, 82].includes(data["current"]["weather_code"])) return "Rain showers";
-    if ([96, 99].includes(data["current"]["weather_code"])) return "Thunderstorm with hail";
+    const weatherCode = data["current"]["weather_code"];
+    if (weatherCode === 0) return "Clear Sky";
+    if ([1,2,3].includes(weatherCode)) return "Cloudy";
+    if ([45,48].includes(weatherCode)) return "Fog";
+    if ([51, 53, 55].includes(weatherCode)) return "Drizzle";
+    if ([56, 57].includes(weatherCode)) return "Freezing drizzle";
+    if ([61, 63, 65].includes(weatherCode)) return "Rain";
+    if ([66, 67].includes(weatherCode)) return "Freezing rain";
+    if ([71, 73, 75, 77].includes(weatherCode)) return "Snow";
+    if ([80, 81, 82].includes(weatherCode)) return "Rain showers";
+    if ([96, 99].includes(weatherCode)) return "Thunderstorm with hail";
     return "Unknown";
 }
 
@@ -73,6 +95,7 @@ async function getCurrentWeather(data) {
     cw_map.set("cVisibility", `${await getVisibility(data)}`);
     cw_map.set("cPressure", `${data["current"]["pressure_msl"]}`);
     cw_map.set("cWeatherCondition", `${await getWeatherCondition(data)}`);
+    cw_map.set("cWeatherConditionTheme", `${await getWCTheme(data)}`);
     cw_map.set("cmaxTemp", `${data["current"]["temperature_2m_max"]}`);
     cw_map.set("cminTemp", `${data["current"]["temperature_2m_min"]}`);
     cw_map.set("cwWindSpeed", `${data["current"]["wind_speed_10m"]}`);
@@ -124,16 +147,26 @@ async function getWAG(data, cMap) {
     return wag_map;
 }
 
-async function main() {
-    const apiResponse = await getCoordinates("Mumbai");
+async function main(cityname) {
+    const apiResponse = await getCoordinates(cityname);
     const lat = apiResponse.results[0].latitude;
     const lon = apiResponse.results[0].longitude;
     const weatherData = await getWeather(lat, lon);
     const cwData = await getCurrentWeather(weatherData);
     const wagData = await getWAG(weatherData, cwData);
     // return weatherData["daily"];
-    return Object.fromEntries(wagData);
+    return combined = { ...Object.fromEntries(cwData), ...Object.fromEntries(wagData)};
+    // return Object.fromEntries(cwData), Object.fromEntries(wagData);
 }
+
+app.get("/city/:cityName", async (req,res) => {
+    const cityName = req.params.cityName;
+    console.log(cityName);
+    const WeatherRes = await main(cityName);
+    console.log(WeatherRes);
+    res.json(WeatherRes);
+});
+
 
 app.get("/", async (req,res) => {
     const cWeather = await main();

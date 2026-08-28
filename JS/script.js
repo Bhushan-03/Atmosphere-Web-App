@@ -1,5 +1,35 @@
+async function getWeatherData(cityName = "Mumbai") {
+    try {
+        const response = await fetch(`http://localhost:3000/city/${encodeURIComponent(cityName)}`);
+        const data = await response.json();
+        getDynamicTheme(data["cWeatherConditionTheme"]);
+    } 
+    catch {
+        console.error("Error:", error);
+    }
+}
+
+function getCityInput() {
+    const cityInput = document.querySelector(".searchedCity");
+    cityInput.addEventListener("keydown", (event)=> {
+        if (event.key === "Enter") {
+            const cityName = cityInput.value;
+            if(cityName) {
+                getWeatherData(cityName);
+            }
+        }
+    });
+}
+
+async function main() {
+    await getWeatherData("Mumbai");
+    getCityInput();
+}
+
+main();
+
 function getDynamicTheme(weatherCondition) {
-    if (weatherCondition === "Sunny") {
+    if (weatherCondition === "Clear Sky") {
         return "dynamicThemeSunny";
     } 
     else if (weatherCondition === "Partly Cloudy") {
@@ -35,6 +65,8 @@ function getDynamicTheme(weatherCondition) {
 }
 
 function setTheme() {
+    const body = document.getElementsByTagName("body");
+    console.log(body);
     const dnTheme = getDynamicTheme("Clear Night");
     const screenContainer = document.querySelector(".screenContainer");
     const currentTheme = screenContainer.attributes[1].nodeValue;
