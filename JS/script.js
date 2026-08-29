@@ -1,85 +1,78 @@
+let currentDynamicTheme = "dynamicThemeSunny";
+let currentThemeMode = "Dynamic Mode";
+
 async function getWeatherData(cityName = "Mumbai") {
     try {
         const response = await fetch(`http://localhost:3000/city/${encodeURIComponent(cityName)}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+            
+        }
         const data = await response.json();
-        getDynamicTheme(data["cWeatherConditionTheme"]);
+        return data;
     } 
-    catch {
+    catch (error) {
         console.error("Error:", error);
+        return null;
     }
 }
-
-function getCityInput() {
-    const cityInput = document.querySelector(".searchedCity");
-    cityInput.addEventListener("keydown", (event)=> {
-        if (event.key === "Enter") {
-            const cityName = cityInput.value;
-            if(cityName) {
-                getWeatherData(cityName);
-            }
-        }
-    });
-}
-
-async function main() {
-    await getWeatherData("Mumbai");
-    getCityInput();
-}
-
-main();
 
 function getDynamicTheme(weatherCondition) {
-    if (weatherCondition === "Clear Sky") {
-        return "dynamicThemeSunny";
-    } 
-    else if (weatherCondition === "Partly Cloudy") {
-        return "dynamicThemePartlyCloudy";
+    const themes = {
+        "Clear Sky": "dynamicThemeSunny",
+        "Partly Cloudy": "dynamicThemePartlyCloudy",
+        "Cloudy": "dynamicThemeCloudy",
+        "Rainy": "dynamicThemeRain",
+        "Thunderstorm": "dynamicThemeThunderstorm",
+        "Fog": "dynamicThemeFogMist",
+        "Snow": "dynamicThemeSnow",
+        "Clear Night": "dynamicThemeClearNight",
+        "Cloudy Night": "dynamicThemeCloudyNight",
+        "Sunrise": "dynamicThemeSunrise",
+        "Sunset": "dynamicThemeSunset"
+    };
+    return themes[weatherCondition] || "dynamicThemeSunny";
+}
+
+function setTheme(themeName) {
+    const screenContainer = document.querySelector(".screenContainer");
+    if (!screenContainer) {
+        return;
     }
-    else if (weatherCondition === "Cloudy") {
-        return "dynamicThemeCloudy";
+    const currentTheme = screenContainer.dataset.themename;
+    if (currentTheme) {
+        screenContainer.classList.remove(currentTheme);
     }
-    else if (weatherCondition === "Rainy") {
-        return "dynamicThemeRain";
-    }
-    else if (weatherCondition === "Thunderstorm") {
-        return "dynamicThemeThunderstorm";
-    }
-    else if (weatherCondition === "Fog") {
-        return "dynamicThemeFogMist";
-    }
-    else if (weatherCondition === "Snow") {
-        return "dynamicThemeSnow";
-    }
-    else if (weatherCondition === "Clear Night") {
-        return "dynamicThemeClearNight";
-    }
-    else if (weatherCondition === "Cloudy Night") {
-        return "dynamicThemeCloudyNight";
-    }
-    else if (weatherCondition === "Sunrise") {
-        return "dynamicThemeSunrise";
-    }
-    else if (weatherCondition === "Sunset") {
-        return "dynamicThemeSunset";
+    screenContainer.classList.add(themeName);
+    screenContainer.dataset.themename = themeName;
+}
+
+function updateDynamicTheme(weatherCondition) {
+    currentDynamicTheme = getDynamicTheme(weatherCondition);
+    if (currentThemeMode === "Dynamic Mode") {
+        setTheme(currentDynamicTheme);
     }
 }
 
-function setTheme() {
-    const body = document.getElementsByTagName("body");
-    console.log(body);
-    const dnTheme = getDynamicTheme("Clear Night");
-    const screenContainer = document.querySelector(".screenContainer");
-    const currentTheme = screenContainer.attributes[1].nodeValue;
-    const selectedTheme = document.querySelectorAll(".selected")[0].innerText;
-    const modes = {"Light Mode" : "lightTheme", "Dark Mode" : "darkTheme", "Dynamic Mode" : dnTheme};
-    const themetoset = modes[selectedTheme];
-    screenContainer.classList.remove(currentTheme);
-    screenContainer.classList.add(themetoset);
-    screenContainer.attributes[1].nodeValue = themetoset;
+function themeSetter() {
+    const selected = document.querySelector(".selected");
+    if (!selected) {
+        return;
+    }
+    currentThemeMode = selected.innerText;
+
+    if (currentThemeMode === "Light Mode") {
+        setTheme("lightTheme");
+    }
+    else if (currentThemeMode === "Dark Mode") {
+        setTheme("darkTheme");
+    }
+    else if (currentThemeMode === "Dynamic Mode") {
+        setTheme(currentDynamicTheme);
+    }
 }
 
 function weatherOptions() {
-
     const dropdown = document.querySelectorAll('.dropdown');
 
     dropdown.forEach(theme_option => {
@@ -87,8 +80,8 @@ function weatherOptions() {
         const caret = theme_option.querySelector('.caret');
         const menu = theme_option.querySelector('.menu');
         const options = theme_option.querySelectorAll('.menu li');
-        const selected = theme_option.querySelectorAll('.selected');
-
+        const selected = theme_option.querySelector('.selected');
+        
         select.addEventListener("click", () => {
             select.classList.toggle('selected-clicked');
             caret.classList.toggle('caret-rotate');
@@ -97,23 +90,91 @@ function weatherOptions() {
 
         options.forEach(option => {
             option.addEventListener("click", () => {
-                selected[0].innerHTML = option.innerHTML;
-                setTheme();
-                select.classList.remove("select-clicked");
+                selected.innerHTML = option.innerHTML;
+                console.log(option.innerText);
+                themeSetter();
+                select.classList.remove("selected-clicked");
                 caret.classList.remove("caret-rotate");
                 menu.classList.remove("menu-open");
                 options.forEach(option => {
                     option.classList.remove("active");
                 });
-                option.classList.toggle("active");
+                option.classList.add("active");
                 if (window.innerWidth < 1024) {
-                    selected[0].childNodes[3].classList.toggle("hidden");
+                    selected.childNodes[3]?.classList.toggle("hidden");
                 } 
             });
         });
     });
 }
-weatherOptions();
+
+function setWeatherCardBG(weatherCondition) {
+    const weathercard = document.querySelector(".weather-Main-Card");
+    const selected = document.querySelector(".selected");
+    const conditions = {
+        "Clear Sky": "ClearSky.png",
+        "Partly Cloudy": "PartlyCloudy.png",
+        "Cloudy": "Cloudy.png",
+        "Rainy": "Rainy.png",
+        "Thunderstorm": "Thunderstorm.png",
+        "Fog": "Fog.png",
+        "Snow": "Snow.png"
+    };
+    if (!selected) {
+        return;
+    }
+    currentThemeMode = selected.innerText;
+    if (currentThemeMode === "Light Mode" || currentThemeMode === "Dark Mode") {
+        weathercard.style.backgroundImage = `url(/Assets/staticbg/${conditions[weatherCondition]})`;
+    }
+    else if (currentThemeMode === "Dynamic Mode") {
+        weathercard.style.backgroundImage = `url(/Assets/dynamicbg/${conditions[weatherCondition]})`;
+    }
+}
+
+async function handleCitySearch(cityName) {
+    const data = await getWeatherData(cityName);
+    if (!data) {
+        return;
+    }
+    const weatherCondition = data.cWeatherConditionTheme;
+    updateDynamicTheme(weatherCondition);
+    setWeatherCardBG(weatherCondition);
+    console.log(weatherCondition);
+    return data;
+}
+
+function getCityInput() {
+    const cityInput = document.querySelector(".searchedCity");
+    if (!cityInput) {
+        return;
+    }
+    cityInput.addEventListener("keydown", async (event)=> {
+        if (event.key !== "Enter") {
+            return;
+        }
+        const cityName = cityInput.value.trim();
+        if (!cityName) {
+            return;
+        }
+        console.log(cityName);
+        await handleCitySearch(cityName);
+    });
+}
+
+async function main() {
+    const data = await getWeatherData("Mumbai");
+    if (!data) {
+        return;
+    }
+    updateDynamicTheme(data.cWeatherConditionTheme);
+    setWeatherCardBG(data.cWeatherConditionTheme);
+    currentThemeMode = "Dynamic Mode";
+    weatherOptions();
+    getCityInput();
+}
+main();
+
 
 
 function showSideBar() {
@@ -143,10 +204,6 @@ function caltempdiff(min, max) {
         return tempDiff;
     }
     return tempDiff + 1;
-}
-
-function getminmaxtemp(mntemps, mxtemps) {
-
 }
 
 function setTempBar() {
@@ -329,7 +386,6 @@ function windChart() {
 }
 windChart();
 
-
 function getAQIInfo(aqi) {
 
     if (aqi <= 50) {
@@ -395,7 +451,6 @@ function updateAQI(aqi) {
     pointer.style.setProperty("--pointer-color", info.color);
 }
 updateAQI(80);
-
 
 function setGauge(value) {
     //Limit value between 0 & 11

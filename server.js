@@ -163,7 +163,7 @@ app.get("/city/:cityName", async (req,res) => {
     const cityName = req.params.cityName;
     console.log(cityName);
     const WeatherRes = await main(cityName);
-    console.log(WeatherRes);
+    // console.log(WeatherRes);
     res.json(WeatherRes);
 });
 
