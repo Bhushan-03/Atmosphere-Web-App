@@ -6,7 +6,6 @@ async function getWeatherData(cityName = "Mumbai") {
         const response = await fetch(`http://localhost:3000/city/${encodeURIComponent(cityName)}`);
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
-            
         }
         const data = await response.json();
         return data;
@@ -72,42 +71,6 @@ function themeSetter() {
     }
 }
 
-function weatherOptions() {
-    const dropdown = document.querySelectorAll('.dropdown');
-
-    dropdown.forEach(theme_option => {
-        const select = theme_option.querySelector('.select');
-        const caret = theme_option.querySelector('.caret');
-        const menu = theme_option.querySelector('.menu');
-        const options = theme_option.querySelectorAll('.menu li');
-        const selected = theme_option.querySelector('.selected');
-        
-        select.addEventListener("click", () => {
-            select.classList.toggle('selected-clicked');
-            caret.classList.toggle('caret-rotate');
-            menu.classList.toggle('menu-open');
-        });
-
-        options.forEach(option => {
-            option.addEventListener("click", () => {
-                selected.innerHTML = option.innerHTML;
-                console.log(option.innerText);
-                themeSetter();
-                select.classList.remove("selected-clicked");
-                caret.classList.remove("caret-rotate");
-                menu.classList.remove("menu-open");
-                options.forEach(option => {
-                    option.classList.remove("active");
-                });
-                option.classList.add("active");
-                if (window.innerWidth < 1024) {
-                    selected.childNodes[3]?.classList.toggle("hidden");
-                } 
-            });
-        });
-    });
-}
-
 function setWeatherCardBG(weatherCondition) {
     const weathercard = document.querySelector(".weather-Main-Card");
     const selected = document.querySelector(".selected");
@@ -132,6 +95,52 @@ function setWeatherCardBG(weatherCondition) {
     }
 }
 
+function weatherOptions(weatherCondition) {
+    const dropdown = document.querySelectorAll('.dropdown');
+
+    dropdown.forEach(theme_option => {
+        const select = theme_option.querySelector('.select');
+        const caret = theme_option.querySelector('.caret');
+        const menu = theme_option.querySelector('.menu');
+        const options = theme_option.querySelectorAll('.menu li');
+        const selected = theme_option.querySelector('.selected');
+        
+        select.addEventListener("click", () => {
+            select.classList.toggle('selected-clicked');
+            caret.classList.toggle('caret-rotate');
+            menu.classList.toggle('menu-open');
+        });
+
+        options.forEach(option => {
+            option.addEventListener("click", () => {
+                selected.innerHTML = option.innerHTML;
+                console.log(option.innerText);
+                themeSetter();
+                setWeatherCardBG(weatherCondition);
+                select.classList.remove("selected-clicked");
+                caret.classList.remove("caret-rotate");
+                menu.classList.remove("menu-open");
+                options.forEach(option => {
+                    option.classList.remove("active");
+                });
+                option.classList.add("active");
+                if (window.innerWidth < 1024) {
+                    selected.childNodes[3]?.classList.toggle("hidden");
+                } 
+            });
+        });
+    });
+}
+
+function setHeroSectionData(data) {
+    const cityDetails = document.querySelector(".cwCityName");
+    const currentTemp = document.querySelector(".currentTemp");
+    const cwCondition = document.querySelector(".currentWeatherCondition");
+    cityDetails.innerText = `${data.CityName}, ${data.CityState}`;
+    currentTemp.innerText = `${data.cTemp}`;
+    cwCondition.innerText = `${data.cWeatherCondition}`;
+}
+
 async function handleCitySearch(cityName) {
     const data = await getWeatherData(cityName);
     if (!data) {
@@ -140,6 +149,7 @@ async function handleCitySearch(cityName) {
     const weatherCondition = data.cWeatherConditionTheme;
     updateDynamicTheme(weatherCondition);
     setWeatherCardBG(weatherCondition);
+    setHeroSectionData(data)
     console.log(weatherCondition);
     return data;
 }
@@ -162,16 +172,19 @@ function getCityInput() {
     });
 }
 
+
 async function main() {
     const data = await getWeatherData("Mumbai");
+    console.log(data);
     if (!data) {
         return;
     }
+    setHeroSectionData(data);
     updateDynamicTheme(data.cWeatherConditionTheme);
     setWeatherCardBG(data.cWeatherConditionTheme);
     currentThemeMode = "Dynamic Mode";
-    weatherOptions();
-    getCityInput();
+    weatherOptions(data.cWeatherConditionTheme);
+    getCityInput(data);
 }
 main();
 

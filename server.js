@@ -21,6 +21,7 @@ async function getCoordinates(city) {
             throw new Error(`Response status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data);
         return data;
     }
     catch (error) {
@@ -34,8 +35,8 @@ async function getWeather(lat,lon) {
         if(!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
+        // console.log(response);
         const result = await response.json();
-        // console.log(result);
         return result;
     }
     catch (error) {
@@ -151,11 +152,12 @@ async function main(cityname) {
     const apiResponse = await getCoordinates(cityname);
     const lat = apiResponse.results[0].latitude;
     const lon = apiResponse.results[0].longitude;
+    const locationName = {"CityName" : apiResponse.results[0].name, "CityState" : apiResponse.results[0].admin1};
     const weatherData = await getWeather(lat, lon);
     const cwData = await getCurrentWeather(weatherData);
     const wagData = await getWAG(weatherData, cwData);
     // return weatherData["daily"];
-    return combined = { ...Object.fromEntries(cwData), ...Object.fromEntries(wagData)};
+    return combined = { ...locationName, ...Object.fromEntries(cwData), ...Object.fromEntries(wagData)};
     // return Object.fromEntries(cwData), Object.fromEntries(wagData);
 }
 
