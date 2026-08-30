@@ -131,7 +131,7 @@
                         <path stroke="currentColor" d="M17.029 16.5295L19.5 19.0005" stroke="#000000" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <input class="searchedCity w-full shadow p-3 pl-10 rounded-2xl bg-(--weather-navbar) cursor-pointer" type="text"
+                    <input class="searchedCity w-full shadow p-3 pl-10 rounded-2xl bg-(--weather-cards) cursor-pointer text-(--weather-muted-text) border border-[1px_solid_rgba(255,255,255,0.3)]" type="text"
                         placeholder="Search for a city or place...">
                 </div>
 
@@ -305,8 +305,9 @@
                     <div class="pl-10 pt-5 space-y-1 relative">
 
                         <div class="clocation relative flex items-center text-(--weather-text-white) space-x-2">
+                            <!-- Showing Current Location Name (Ex: Mumbai, Maharashtra) -->
                             <p class="cwCityName text-2xl font-semibold">Mumbai, Maharashtra</p>
-                            <svg class="w-5.5 h-5.5 text-(--weather-text-white)" xmlns="http://www.w3.org/2000/svg"
+                            <svg class="cwLocationIcon hidden w-5.5 h-5.5 text-(--weather-text-white)" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 256 256"
                                 xml:space="preserve">
                                 <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
@@ -324,16 +325,17 @@
                         </div>
 
                         <div class="cl-dt flex space-x-2 text-(--weather-text-white)">
-                            <p>Thursday</p>
+                            <!-- <p class="cwl-dayName">Thursday</p>
                             <p>•</p>
-                            <p>13 Aug 2026</p>
+                            <p class="cwl-date">13 Aug 2026</p>
                             <p>•</p>
-                            <p>1:30 PM</p>
+                            <p class="cwl-time">1:30 PM</p> -->
                         </div>
 
                         <div class="clw mt-5 text-(--weather-text-white)">
-                            <p class="currentWeatherCondition">Partly Cloudy</p>
-                            <p class="currentTemp text-8xl font-bold mt-2">28°</p>
+                            <!-- <p class="currentWeatherCondition">Partly Cloudy</p> -->
+                            <p class="currentWeatherCondition"></p>
+                            <p class="currentTemp text-8xl font-bold mt-2"></p>
                             <div class="hl-temp flex space-x-3 mt-3">
                                 <div class="l-temp flex">
                                     <svg class="text-(--weather-text-white)" xmlns="http://www.w3.org/2000/svg"
@@ -347,7 +349,7 @@
                                                 transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                                         </g>
                                     </svg>
-                                    <p>25°</p>
+                                    <p class="cw-ltemp">25°</p>
                                 </div>
 
                                 <div class="h-temp flex space-x-2">
@@ -362,7 +364,7 @@
                                                 transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                                         </g>
                                     </svg>
-                                    <p>31°</p>
+                                    <p class="cw-htemp">31°</p>
                                 </div>
                             </div>
                         </div>
@@ -386,7 +388,7 @@
                                 </svg>
                                 <p>Humidity</p>
                             </div>
-                            <p>78%</p>
+                            <p class="cw-Humidity">78%</p>
                         </div>
 
                         <div class="clwd-wind flex justify-between">
@@ -416,7 +418,7 @@
                                 </svg>
                                 <p>Wind</p>
                             </div>
-                            <p>14 km/h SW</p>
+                            <p class="cw-WSpeed">14 km/h SW</p>
                         </div>
 
                         <div class="clwd-pressure flex justify-between">
@@ -454,7 +456,7 @@
                                 </svg>
                                 <p>Pressure</p>
                             </div>
-                            <p>1008 hPa</p>
+                            <p class="cw-Pressure">1008 hPa</p>
                         </div>
 
                         <div class="clwd-visibility flex justify-between">
@@ -476,7 +478,7 @@
                                 </svg>
                                 <p>Visibility</p>
                             </div>
-                            <p>8.4 km</p>
+                            <p class="cw-Visibility">8.4 km</p>
                         </div>
                     </div>
                 </div>

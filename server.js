@@ -21,7 +21,7 @@ async function getCoordinates(city) {
             throw new Error(`Response status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         return data;
     }
     catch (error) {
@@ -37,6 +37,7 @@ async function getWeather(lat,lon) {
         }
         // console.log(response);
         const result = await response.json();
+        console.log(result);
         return result;
     }
     catch (error) {
@@ -90,6 +91,8 @@ async function getCurrentWeather(data) {
     let cw_map = new Map();
 
     cw_map.set("cTime", `${await formatTime(data["current"]["time"])}`);
+    cw_map.set("cDate", `${await formatDate(data["current"]["time"])}`);
+    cw_map.set("cDayName", `${await formatday(data["current"]["time"])}`);
     cw_map.set("cTemp", `${data["current"]["temperature_2m"]}`);
     cw_map.set("cHumidity", `${data["current"]["relative_humidity_2m"]}`);
     cw_map.set("cFeelslike", `${data["current"]["apparent_temperature"]}`);
@@ -97,13 +100,17 @@ async function getCurrentWeather(data) {
     cw_map.set("cPressure", `${data["current"]["pressure_msl"]}`);
     cw_map.set("cWeatherCondition", `${await getWeatherCondition(data)}`);
     cw_map.set("cWeatherConditionTheme", `${await getWCTheme(data)}`);
-    cw_map.set("cmaxTemp", `${data["current"]["temperature_2m_max"]}`);
-    cw_map.set("cminTemp", `${data["current"]["temperature_2m_min"]}`);
+    cw_map.set("todaysmaxTemp", `${data["daily"]["temperature_2m_max"][0]}`);
+    cw_map.set("todaysminTemp", `${data["daily"]["temperature_2m_min"][0]}`);
     cw_map.set("cwWindSpeed", `${data["current"]["wind_speed_10m"]}`);
     cw_map.set("cwWindDirection", `${await getWDName(data)}`);
     cw_map.set("cwWindGusts", `${data["current"]["wind_gusts_10m"]}`);
     cw_map.set("cwPrecipitation", `${await getPrecipitation(data)}`);
     cw_map.set("cwCloudCover", `${data["current"]["cloud_cover"]}`);
+    cw_map.set("cwUVIndex", `${data["daily"]["uv_index_max"][0]}`);
+    cw_map.set("cwSunrise", `${await getSunrise(data)}`);
+    cw_map.set("cwSunset", `${await getSunset(data)}`);
+    cw_map.set("cwDayLightDuration", `${await formatDuration(data["daily"]["daylight_duration"][0])}`);
 
     return cw_map;
 }
@@ -124,29 +131,26 @@ async function formatTime(time) {
     });
 }
 
+async function formatDate(date) {
+    return new Date(date).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+async function formatday(date) {
+    return new Date(date).toLocaleDateString("en-US", {
+        weekday: "long"
+    });
+}
+
 async function formatDuration(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     return `${hours}h ${minutes}m`;
 }
 
-async function getWAG(data, cMap) {
-    let wag_map = new Map();
-
-    wag_map.set("wagHumidity", `${cMap.get("cHumidity")}`);
-    wag_map.set("wagWindSpeed", `${cMap.get("cwWindSpeed")}`);
-    wag_map.set("wagWindDirection", `${cMap.get("cwWindDirection")}`);
-    wag_map.set("wagPrecipitation", `${cMap.get("cwPrecipitation")}`);
-    wag_map.set("wagUVIndex", `${data["daily"]["uv_index_max"][0]}`);
-    wag_map.set("wagVisibility", `${cMap.get("cVisibility")}`);
-    wag_map.set("wagCloudCover", `${cMap.get("cwCloudCover")}`);
-    wag_map.set("wagSunrise", `${await getSunrise(data)}`);
-    wag_map.set("wagSunset", `${await getSunset(data)}`);
-    wag_map.set("wagPressure", `${cMap.get("cPressure")}`);
-    wag_map.set("wagDayLightDuration", `${await formatDuration(data["daily"]["daylight_duration"][0])}`);
-
-    return wag_map;
-}
 
 async function main(cityname) {
     const apiResponse = await getCoordinates(cityname);
@@ -155,9 +159,9 @@ async function main(cityname) {
     const locationName = {"CityName" : apiResponse.results[0].name, "CityState" : apiResponse.results[0].admin1};
     const weatherData = await getWeather(lat, lon);
     const cwData = await getCurrentWeather(weatherData);
-    const wagData = await getWAG(weatherData, cwData);
     // return weatherData["daily"];
-    return combined = { ...locationName, ...Object.fromEntries(cwData), ...Object.fromEntries(wagData)};
+    return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}}
+    // return combined = { ...locationName, ...Object.fromEntries(cwData)};
     // return Object.fromEntries(cwData), Object.fromEntries(wagData);
 }
 
@@ -165,6 +169,7 @@ app.get("/city/:cityName", async (req,res) => {
     const cityName = req.params.cityName;
     console.log(cityName);
     const WeatherRes = await main(cityName);
+    console.log(WeatherRes);
     // console.log(WeatherRes);
     res.json(WeatherRes);
 });

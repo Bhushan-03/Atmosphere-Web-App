@@ -1,6 +1,16 @@
 let currentDynamicTheme = "dynamicThemeSunny";
 let currentThemeMode = "Dynamic Mode";
 
+// function showSkeletonLoader(isLoading){
+//     document.querySelector(".mainScreen").classList.toggle("animate-skeleton-loading-dark", isLoading);
+//     document.querySelector(".weather-Main-Card").classList.toggle("animate-skeleton-loading", isLoading);
+// }
+// function hideSkeletonLoader(isLoading){
+//     document.querySelector(".mainScreen").classList.remove("animate-skeleton-loading-dark", isLoading);
+//     document.querySelector(".weather-Main-Card").classList.remove("animate-skeleton-loading", isLoading);
+//     document.querySelector(".cwLocationIcon").classList.remove("hidden", isLoading);
+// }
+
 async function getWeatherData(cityName = "Mumbai") {
     try {
         const response = await fetch(`http://localhost:3000/city/${encodeURIComponent(cityName)}`);
@@ -136,9 +146,28 @@ function setHeroSectionData(data) {
     const cityDetails = document.querySelector(".cwCityName");
     const currentTemp = document.querySelector(".currentTemp");
     const cwCondition = document.querySelector(".currentWeatherCondition");
+    const cldt = document.querySelector(".cl-dt");
+    const cwminTemp = document.querySelector(".cw-ltemp");
+    const cwmaxTemp = document.querySelector(".cw-htemp");
+    const cw_Humidity = document.querySelector(".cw-Humidity");
+    const cw_WSpeed = document.querySelector(".cw-WSpeed");
+    const cw_Pressure = document.querySelector(".cw-Pressure");
+    const cw_Visibility = document.querySelector(".cw-Visibility");
     cityDetails.innerText = `${data.CityName}, ${data.CityState}`;
-    currentTemp.innerText = `${data.cTemp}`;
+    currentTemp.innerText = `${data.cTemp}°`;
     cwCondition.innerText = `${data.cWeatherCondition}`;
+    cldt.innerHTML = `<p class="cwl-dayName">${data.cDayName}</p>
+                            <p>•</p>
+                            <p class="cwl-date">${data.cDate}</p>
+                            <p>•</p>
+                            <p class="cwl-time">${data.cTime}</p>`;
+    cwminTemp.innerText = `${data.todaysminTemp}°`;
+    cwmaxTemp.innerText = `${data.todaysmaxTemp}°`;
+    cw_Humidity.innerText = `${data.cHumidity}%`;
+    cw_WSpeed.innerText = `${data.cwWindSpeed} ${data.cwWindDirection}`;
+    cw_Pressure.innerText = `${data.cPressure} hPa`;
+    cw_Visibility.innerText = `${data.cVisibility} km`;
+    
 }
 
 async function handleCitySearch(cityName) {
@@ -174,17 +203,23 @@ function getCityInput() {
 
 
 async function main() {
+
+    // showSkeletonLoader(true);
+
     const data = await getWeatherData("Mumbai");
     console.log(data);
     if (!data) {
         return;
     }
-    setHeroSectionData(data);
-    updateDynamicTheme(data.cWeatherConditionTheme);
-    setWeatherCardBG(data.cWeatherConditionTheme);
+
+    // hideSkeletonLoader(false);
+
+    setHeroSectionData(data.Current);
+    updateDynamicTheme(data.Current.cWeatherConditionTheme);
+    setWeatherCardBG(data.Current.cWeatherConditionTheme);
     currentThemeMode = "Dynamic Mode";
-    weatherOptions(data.cWeatherConditionTheme);
-    getCityInput(data);
+    weatherOptions(data.Current.cWeatherConditionTheme);
+    getCityInput();
 }
 main();
 
