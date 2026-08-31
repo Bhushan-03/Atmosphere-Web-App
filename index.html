@@ -831,16 +831,16 @@
                     <div class="relative shrink-0">
                         <div class="w-c-content relative mt-5 flex flex-col gap-2 mx-2">
                             <p class="text-sm">Current Wind</p>
-                            <p class="text-2xl font-semibold">14 km/h</p>
-                            <p class="text-sm">Southwest</p>
+                            <p class="cw-wSpeed text-2xl font-semibold">14 km/h</p>
+                            <p class="cw-wDirection text-sm">Southwest</p>
                             <div class="wg mt-3 flex flex-col gap-2">
                                 <p class="text-sm">Wind Gusts</p>
-                                <p class="font-semibold text-xl">22 km/h</p>
+                                <p class="cw-wGusts font-semibold text-xl">22 km/h</p>
                             </div>
                         </div>
 
                         <div class="absolute top-0 right-10 flex justify-self-center lap:max-desk:right-0">
-                            <svg class="w-55 h-55 lap:max-desk:w-50 lap:max-desk:h-50" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+                            <svg id="windArrow" class="w-55 h-55 lap:max-desk:w-50 lap:max-desk:h-50" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
                                 <rect fill="white" />
                                 <circle cx="184" cy="163" r="126" fill="none" stroke="#c9d3e6" stroke-width="14" />
                                 <circle cx="184" cy="163" r="121" fill="none" stroke="#c9d3e6" stroke-width="1" />
@@ -1052,17 +1052,17 @@
                         <div class="absolute bottom-0 left-[8%] flex flex-col items-center">
                             <img src="Assets/sunrise.png" alt="">
                             <p class="text-orange-300 font-semibold text-sm">Sunrise</p>
-                            <p class="font-semibold text-lg">6:12 AM</p>
+                            <p class="today-sunrise font-semibold text-lg">6:12 AM</p>
                         </div>
                         <div class="absolute bottom-0 right-[8%] flex flex-col items-center">
                             <img src="Assets/sunset.png" alt="">
                             <p class="text-orange-300 font-semibold text-sm">Sunset</p>
-                            <p class="font-semibold text-lg">6:58 PM</p>
+                            <p class="today-sunset font-semibold text-lg">6:58 PM</p>
                         </div>
                     </div>
                     <div class="relative mt-auto mb-auto w-full flex flex-col items-center">
                         <p>Daylight</p>
-                        <p class="text-lg font-semibold">12h 46m</p>
+                        <p class="today-dlduration text-lg font-semibold">12h 46m</p>
                     </div>
                 </div>
 

@@ -219,9 +219,22 @@ function setGauge(value) {
 function setUIData(data) {
     const cw_uvIndex = document.querySelector(".cw-uvIndex");
     const cw_uvIndex_max = document.querySelector(".cw-uvIndex-Max");
+    const today_sunrise = document.querySelector(".today-sunrise");
+    const today_sunset = document.querySelector(".today-sunset");
+    const today_dlduration = document.querySelector(".today-dlduration");
+    const cw_wSpeed = document.querySelector(".cw-wSpeed");
+    const cw_wDirection = document.querySelector(".cw-wDirection");
+    const cw_wGusts = document.querySelector(".cw-wGusts");
     setGauge(data.cwUVIndex);
+    setWindDirection(data.cwWindDirection);
     cw_uvIndex.innerText = `${data.cwUVIndex}`;
     cw_uvIndex_max.innerText = `${data.cwUVIndexMax}`;
+    today_sunrise.innerText = `${data.cwSunrise}`;
+    today_sunset.innerText = `${data.cwSunset}`;
+    today_dlduration.innerText = `${data.cwDayLightDuration}`;
+    cw_wSpeed.innerText = `${data.cwWindSpeed}`;
+    cw_wDirection.innerText = `${data.cwWindDirection}`;
+    cw_wGusts.innerText = `${data.cwWindGusts}`;
 }
 
 async function handleCitySearch(cityName) {
@@ -256,6 +269,33 @@ function getCityInput() {
         await handleCitySearch(cityName);
     });
 }
+
+function setWindDirection(direction) {
+    const rotations = {
+        North: 0,
+        Northeast: 45,
+        East: 90,
+        Southeast: 135,
+        South: 180,
+        Southwest: 225,
+        West: 270,
+        Northwest: 315
+    };
+
+    const arrow = document.getElementById("direction-arrow");
+
+    if (!arrow) return;
+
+    const rotation = rotations[direction];
+
+    if (rotation === undefined) {
+        console.warn(`Invalid wind direction: ${direction}`);
+        return;
+    }
+
+    arrow.setAttribute("transform", `rotate(${rotation} 184 163)`);
+}
+
 
 
 async function main() {
