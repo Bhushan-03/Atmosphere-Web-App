@@ -31,6 +31,8 @@ async function getCoordinates(city) {
 
 async function getWeather(lat,lon) {
     try {
+        console.log(lat);
+        console.log(lon);
         let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,daylight_duration&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,rain,pressure_msl,temperature_2m_max,temperature_2m_min&forecast_days=14&timezone=auto`);
         if(!response.ok) {
             throw new Error(`Response status: ${response.status}`);

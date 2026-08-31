@@ -166,8 +166,31 @@ function setHeroSectionData(data) {
     cw_Humidity.innerText = `${data.cHumidity}%`;
     cw_WSpeed.innerText = `${data.cwWindSpeed} ${data.cwWindDirection}`;
     cw_Pressure.innerText = `${data.cPressure} hPa`;
-    cw_Visibility.innerText = `${data.cVisibility} km`;
-    
+    cw_Visibility.innerText = `${data.cVisibility} km`; 
+}
+
+function setWAGData(data) {
+    const wag_Humidity = document.querySelector(".wag-Humidity");
+    const wag_windSpeed = document.querySelector(".wag-windSpeed");
+    const wag_windDirection = document.querySelector(".wag-windDirection");
+    const wag_Precipitation = document.querySelector(".wag-Precipitation");
+    const wag_uvIndex = document.querySelector(".wag-uvIndex");
+    const wag_Visibility = document.querySelector(".wag-Visibility");
+    const wag_CloudCover = document.querySelector(".wag-CloudCover");
+    const wag_Sunrise = document.querySelector(".wag-Sunrise");
+    const wag_Sunset = document.querySelector(".wag-Sunset");
+    const wag_Pressure = document.querySelector(".wag-Pressure");
+
+    wag_Humidity.innerText = `${data.cHumidity}%`;
+    wag_windSpeed.innerText = `${data.cwWindSpeed} km/h`;
+    wag_windDirection.innerText = `${data.cwWindDirection}`;
+    wag_Precipitation.innerText = `${data.cwPrecipitation}%`;
+    wag_uvIndex.innerText = `${data.cwUVIndex}`;
+    wag_Visibility.innerText = `${data.cVisibility} km`;
+    wag_CloudCover.innerText = `${data.cwCloudCover}%`;
+    wag_Sunrise.innerText = `${data.cwSunrise}`;
+    wag_Sunset.innerText = `${data.cwSunset}`;
+    wag_Pressure.innerText = `${data.cPressure} hPa`;
 }
 
 async function handleCitySearch(cityName) {
@@ -175,10 +198,11 @@ async function handleCitySearch(cityName) {
     if (!data) {
         return;
     }
-    const weatherCondition = data.cWeatherConditionTheme;
+    const weatherCondition = data.Current.cWeatherConditionTheme;
     updateDynamicTheme(weatherCondition);
     setWeatherCardBG(weatherCondition);
-    setHeroSectionData(data)
+    setHeroSectionData(data.Current);
+    setWAGData(data.Current);
     console.log(weatherCondition);
     return data;
 }
@@ -215,6 +239,7 @@ async function main() {
     // hideSkeletonLoader(false);
 
     setHeroSectionData(data.Current);
+    setWAGData(data.Current);
     updateDynamicTheme(data.Current.cWeatherConditionTheme);
     setWeatherCardBG(data.Current.cWeatherConditionTheme);
     currentThemeMode = "Dynamic Mode";
