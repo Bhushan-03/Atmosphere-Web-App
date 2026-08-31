@@ -227,6 +227,7 @@ function setUIData(data) {
     const cw_wGusts = document.querySelector(".cw-wGusts");
     setGauge(data.cwUVIndex);
     setWindDirection(data.cwWindDirection);
+    setAQIData(data);
     cw_uvIndex.innerText = `${data.cwUVIndex}`;
     cw_uvIndex_max.innerText = `${data.cwUVIndexMax}`;
     today_sunrise.innerText = `${data.cwSunrise}`;
@@ -294,6 +295,31 @@ function setWindDirection(direction) {
     }
 
     arrow.setAttribute("transform", `rotate(${rotation} 184 163)`);
+}
+
+
+function setAQIData(data) {
+    const aqiValue = document.querySelector(".caqi-value");
+    const aqiPM2_5 = document.querySelector(".caqiPM2_5");
+    const aqiPM10 = document.querySelector(".caqiPM10");
+    const aqiNO2 = document.querySelector(".caqiNO2");
+    const aqiO3 = document.querySelector(".caqiO3");
+    const aqiCO = document.querySelector(".caqiCO");
+    const aqiSO2 = document.querySelector(".caqiSO2");
+    updateAQI(data.caqAQI);
+    setInterval(() => {updateSunPosition(data.cwSunrise, data.cwSunset)}, 1000);
+    aqiValue.innerText = `${data.caqAQI}`;
+    aqiPM2_5.innerText = `${data.caqPM2_5}`;
+    aqiPM10.innerText = `${data.caqPM10}`;
+    aqiNO2.innerText = `${data.caqNO2}`;
+    aqiO3.innerText = `${data.caqO3}`;
+    aqiCO.innerText = `${data.caqCO}`;
+    aqiSO2.innerText = `${data.caqSO2}`;
+
+    const aq_status = document.querySelectorAll(".aq-status");
+    aq_status.forEach(aqs => {
+        console.log(aqs);
+    });
 }
 
 
@@ -597,6 +623,57 @@ function updateAQI(aqi) {
     pointer.style.left = `${(aqi / 500) * 100}%`;
     pointer.style.setProperty("--pointer-color", info.color);
 }
-updateAQI(80);
+
+
+function timeToMinutes(time) {
+    const [timePart, period] = time.trim().split(" ");
+    let [hours, minutes] = timePart.split(":").map(Number);
+    if (period === "PM" && hours !== 12) {
+        hours += 12;
+    }
+    if (period === "AM" && hours === 12) {
+        hours = 0;
+    }
+    return hours * 60 + minutes;
+}
+
+
+function updateSunPosition(sunriseText, sunsetText) {
+
+    const sunrise = timeToMinutes(sunriseText);
+    const sunset = timeToMinutes(sunsetText);
+
+    const now = new Date();
+
+    const currentTime =
+        now.getHours() * 60 +
+        now.getMinutes() +
+        now.getSeconds() / 60;
+
+    // Calculate progress from sunrise → sunset
+    let progress =
+        (currentTime - sunrise) /
+        (sunset - sunrise);
+
+    // Keep it between 0 and 1
+    progress = Math.max(0, Math.min(1, progress));
+
+    // SVG arc dimensions
+    const centerX = 160;
+    const centerY = 150;
+    const radius = 125;
+
+    // Convert progress to angle
+    const angle = Math.PI * (1 - progress);
+
+    // Calculate X/Y on the semicircle
+    const x = centerX + radius * Math.cos(angle);
+
+    const y = centerY - radius * Math.sin(angle);
+
+    // Move existing sun
+    document.getElementById("sunIcon").setAttribute("transform",`translate(${x} ${y}) scale(0.12) translate(-256 -256)`);
+}
+
 
 

@@ -35,11 +35,26 @@ async function getWeather(lat,lon) {
             throw new Error(`Response status: ${response.status}`);
         }
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
         return result;
     }
     catch (error) {
         console.error(error.message);
+    }
+}
+
+async function getAirData(lat, lon) {
+    try {
+        let response = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi,pm10,pm2_5,nitrogen_dioxide,ozone,carbon_monoxide,sulphur_dioxide&utm_source=chatgpt.com`);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log(result);
+        return result;
+    }
+    catch {
+
     }
 }
 
@@ -84,32 +99,39 @@ async function getVisibility(data) {
     return (data["current"]["visibility"]) / 1000
 }
 
-async function getCurrentWeather(data) {
+async function getCurrentWeather(data, airData) {
 
     let cw_map = new Map();
 
-    cw_map.set("cTime", `${await formatTime(data["current"]["time"])}`);
-    cw_map.set("cDate", `${await formatDate(data["current"]["time"])}`);
-    cw_map.set("cDayName", `${await formatday(data["current"]["time"])}`);
-    cw_map.set("cTemp", `${data["current"]["temperature_2m"]}`);
-    cw_map.set("cHumidity", `${data["current"]["relative_humidity_2m"]}`);
-    cw_map.set("cFeelslike", `${data["current"]["apparent_temperature"]}`);
+    cw_map.set("cTime", `${await formatTime(data.current.time)}`);
+    cw_map.set("cDate", `${await formatDate(data.current.time)}`);
+    cw_map.set("cDayName", `${await formatday(data.current.time)}`);
+    cw_map.set("cTemp", `${data.current.temperature_2m}`);
+    cw_map.set("cHumidity", `${data.current.relative_humidity_2m}`);
+    cw_map.set("cFeelslike", `${data.current.apparent_temperature}`);
     cw_map.set("cVisibility", `${await getVisibility(data)}`);
-    cw_map.set("cPressure", `${data["current"]["pressure_msl"]}`);
+    cw_map.set("cPressure", `${data.current.pressure_msl}`);
     cw_map.set("cWeatherCondition", `${await getWeatherCondition(data)}`);
     cw_map.set("cWeatherConditionTheme", `${await getWCTheme(data)}`);
-    cw_map.set("todaysmaxTemp", `${data["daily"]["temperature_2m_max"][0]}`);
-    cw_map.set("todaysminTemp", `${data["daily"]["temperature_2m_min"][0]}`);
-    cw_map.set("cwWindSpeed", `${data["current"]["wind_speed_10m"]}`);
+    cw_map.set("todaysmaxTemp", `${data.daily.temperature_2m_max[0]}`);
+    cw_map.set("todaysminTemp", `${data.daily.temperature_2m_min[0]}`);
+    cw_map.set("cwWindSpeed", `${data.current.wind_speed_10m}`);
     cw_map.set("cwWindDirection", `${await getWDName(data)}`);
-    cw_map.set("cwWindGusts", `${data["current"]["wind_gusts_10m"]}`);
+    cw_map.set("cwWindGusts", `${data.current.wind_gusts_10m}`);
     cw_map.set("cwPrecipitation", `${await getPrecipitation(data)}`);
-    cw_map.set("cwCloudCover", `${data["current"]["cloud_cover"]}`);
-    cw_map.set("cwUVIndex", `${data["current"]["uv_index"]}`);
-    cw_map.set("cwUVIndexMax", `${data["daily"]["uv_index_max"][0]}`);
+    cw_map.set("cwCloudCover", `${data.current.cloud_cover}`);
+    cw_map.set("cwUVIndex", `${data.current.uv_index}`);
+    cw_map.set("cwUVIndexMax", `${data.daily.uv_index_max[0]}`);
     cw_map.set("cwSunrise", `${await getSunrise(data)}`);
     cw_map.set("cwSunset", `${await getSunset(data)}`);
-    cw_map.set("cwDayLightDuration", `${await formatDuration(data["daily"]["daylight_duration"][0])}`);
+    cw_map.set("cwDayLightDuration", `${await formatDuration(data.daily.daylight_duration[0])}`);
+    cw_map.set("caqAQI", `${airData.current.european_aqi}`);
+    cw_map.set("caqPM10", `${airData.current.pm10}`);
+    cw_map.set("caqPM2_5", `${airData.current.pm2_5}`);
+    cw_map.set("caqNO2", `${airData.current.nitrogen_dioxide}`);
+    cw_map.set("caqO3", `${airData.current.ozone}`);
+    cw_map.set("caqCO", `${airData.current.carbon_monoxide}`);
+    cw_map.set("caqSO2", `${airData.current.sulphur_dioxide}`);
 
     return cw_map;
 }
@@ -160,14 +182,22 @@ async function getLocationName(response) {
     }
 }
 
+async function getHoulryData(data) {
+    let hourlyData = new Map();
+
+    console.log(data);
+}
+
+
 async function main(cityname) {
     const apiResponse = await getCoordinates(cityname);
     const lat = apiResponse.results[0].geometry.lat;
     const lon = apiResponse.results[0].geometry.lng;
     const locationName = {"CityName" : await getLocationName(apiResponse)};
     const weatherData = await getWeather(lat, lon);
-    const cwData = await getCurrentWeather(weatherData);
-    // return weatherData["daily"];
+    const AirQualityData = await getAirData(lat, lon);
+    const cwData = await getCurrentWeather(weatherData, AirQualityData);
+    const hourlyData = await getHoulryData(weatherData);
     return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}};
 }
 
@@ -175,7 +205,7 @@ app.get("/city/:cityName", async (req,res) => {
     const cityName = req.params.cityName;
     console.log(cityName);
     const WeatherRes = await main(cityName);
-    console.log(WeatherRes);
+    // console.log(WeatherRes);
     // console.log(WeatherRes);
     res.json(WeatherRes);
 });

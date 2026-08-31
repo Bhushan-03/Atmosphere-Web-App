@@ -882,7 +882,7 @@
                     <p class="text(--weather-main-text) font-semibold">AIR QUALITY</p>
                     <div class="mt-5 flex flex-col gap-2">
                         <p>AQI</p>
-                        <p class="aqi-value text-5xl font-bold" id="aqiValue">42</p>
+                        <p class="caqi-value text-5xl font-bold" id="aqiValue">42</p>
                         <div class="status flex items-center gap-2 mt-3.5 text-lg font-semibold lap:max-desk:mt-0" id="status">
                             <span class="status-dot w-4.5 h-4.5 rounded-full bg-[currentColor]"></span>
                             <span class="status-text">Good</span>
@@ -907,43 +907,37 @@
                         <div
                             class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
                             <p class="text-base">PM2.5</p>
-                            <p class="font-semibold text-2xl">18</p>
-                            <p class="text-base">Good</p>
+                            <p class="caqiPM2_5 font-semibold text-2xl">18</p>
                         </div>
 
                         <div
                             class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
                             <p class="text-base">PM10</p>
-                            <p class="font-semibold text-2xl">32</p>
-                            <p class="text-base">Good</p>
+                            <p class="caqiPM10 font-semibold text-2xl">32</p>
                         </div>
 
                         <div
                             class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
                             <p class="text-base">NO2</p>
-                            <p class="font-semibold text-2xl">14</p>
-                            <p class="text-base">Good</p>
+                            <p class="caqiNO2 font-semibold text-2xl">14</p>
                         </div>
 
                         <div
                             class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
-                            <p class="text-base">O2</p>
-                            <p class="font-semibold text-2xl">28</p>
-                            <p class="text-base">Good</p>
+                            <p class="text-base">O3</p>
+                            <p class="caqiO3 font-semibold text-2xl">28</p>
                         </div>
 
                         <div
                             class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
                             <p class="text-base">CO</p>
-                            <p class="font-semibold text-2xl">6</p>
-                            <p class="text-base">Good</p>
+                            <p class="caqiCO font-semibold text-2xl">6</p>
                         </div>
 
                         <div
                             class="bg-(--weather-bg) shadow p-2 rounded-xl flex flex-col items-center w-[15%] gap-2 hover:bg-(--weather-hover-btn) cursor-pointer">
                             <p class="text-base">SO2</p>
-                            <p class="font-semibold text-2xl">5</p>
-                            <p class="text-base">Good</p>
+                            <p class="caqiSO2 font-semibold text-2xl">5</p>
                         </div>
                     </div>
                 </div>
@@ -1001,11 +995,9 @@
                     <div class="sr-st-graph relative h-[55%] w-full mt-auto mb-auto lap:max-desk:h-full">
                         <svg class="text-(--weather-normal-text) relative flex justify-self-center lap:max-desk:w-60 lap:max-desk:h-auto" width="320" height="190" viewBox="0 0 320 150">
                             <!-- Curved gauge -->
-                             <path d="M 35 150 A 125 125 0 0 1 285 150" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="10,8"/>
-
-                             <circle cx="160" cy="25" r="38" fill="white"/>
+                             <path d="M 35 150 A 125 125 0 0 1 285 150" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="10,8"/>
                              
-                             <g class="srstSun" transform="translate(160 25) scale(0.12) translate(-256 -256)">
+                             <g id="sunIcon" class="srstSun" transform="translate(160 25) scale(0.12) translate(-256 -256)">
 
                                 <path style="fill:#F6BB42;" d="M255.992,85.333c-5.891,0-10.656-4.781-10.656-10.671V10.664C245.336,4.773,250.102,0,255.992,0
                                     c5.906,0,10.672,4.773,10.672,10.664v63.998C266.664,80.552,261.898,85.333,255.992,85.333z"/>
