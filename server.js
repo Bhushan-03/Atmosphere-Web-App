@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const port = 3000;
 
 const cors = require('cors');
@@ -10,9 +11,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 async function getCoordinates(city) {
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${process.env.OpenCage_API_KEY}&pretty=1&no_annotations=1`;
 
     try{
         const response = await fetch(url);
@@ -21,7 +21,6 @@ async function getCoordinates(city) {
             throw new Error(`Response status: ${response.status}`);
         }
         const data = await response.json();
-        // console.log(data);
         return data;
     }
     catch (error) {
@@ -31,13 +30,10 @@ async function getCoordinates(city) {
 
 async function getWeather(lat,lon) {
     try {
-        console.log(lat);
-        console.log(lon);
-        let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,daylight_duration&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,rain,pressure_msl,temperature_2m_max,temperature_2m_min&forecast_days=14&timezone=auto`);
+        let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,daylight_duration&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,rain,pressure_msl,temperature_2m_max,temperature_2m_min,uv_index&forecast_days=14&timezone=auto`);
         if(!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        // console.log(response);
         const result = await response.json();
         console.log(result);
         return result;
@@ -109,7 +105,8 @@ async function getCurrentWeather(data) {
     cw_map.set("cwWindGusts", `${data["current"]["wind_gusts_10m"]}`);
     cw_map.set("cwPrecipitation", `${await getPrecipitation(data)}`);
     cw_map.set("cwCloudCover", `${data["current"]["cloud_cover"]}`);
-    cw_map.set("cwUVIndex", `${data["daily"]["uv_index_max"][0]}`);
+    cw_map.set("cwUVIndex", `${data["current"]["uv_index"]}`);
+    cw_map.set("cwUVIndexMax", `${data["daily"]["uv_index_max"][0]}`);
     cw_map.set("cwSunrise", `${await getSunrise(data)}`);
     cw_map.set("cwSunset", `${await getSunset(data)}`);
     cw_map.set("cwDayLightDuration", `${await formatDuration(data["daily"]["daylight_duration"][0])}`);
@@ -153,18 +150,25 @@ async function formatDuration(seconds) {
     return `${hours}h ${minutes}m`;
 }
 
+async function getLocationName(response) {
+    if (response.results[0].components.city) {
+        console.log(`${response.results[0].components.city}, ${response.results[0].components.state}`);
+        return `${response.results[0].components.city}, ${response.results[0].components.state}`;
+    }
+    else if (!response.results[0].components.city) {
+        return response.results[0].formatted;
+    }
+}
 
 async function main(cityname) {
     const apiResponse = await getCoordinates(cityname);
-    const lat = apiResponse.results[0].latitude;
-    const lon = apiResponse.results[0].longitude;
-    const locationName = {"CityName" : apiResponse.results[0].name, "CityState" : apiResponse.results[0].admin1};
+    const lat = apiResponse.results[0].geometry.lat;
+    const lon = apiResponse.results[0].geometry.lng;
+    const locationName = {"CityName" : await getLocationName(apiResponse)};
     const weatherData = await getWeather(lat, lon);
     const cwData = await getCurrentWeather(weatherData);
     // return weatherData["daily"];
-    return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}}
-    // return combined = { ...locationName, ...Object.fromEntries(cwData)};
-    // return Object.fromEntries(cwData), Object.fromEntries(wagData);
+    return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}};
 }
 
 app.get("/city/:cityName", async (req,res) => {

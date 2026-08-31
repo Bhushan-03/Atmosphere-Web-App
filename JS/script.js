@@ -153,7 +153,7 @@ function setHeroSectionData(data) {
     const cw_WSpeed = document.querySelector(".cw-WSpeed");
     const cw_Pressure = document.querySelector(".cw-Pressure");
     const cw_Visibility = document.querySelector(".cw-Visibility");
-    cityDetails.innerText = `${data.CityName}, ${data.CityState}`;
+    cityDetails.innerText = `${data.CityName}`;
     currentTemp.innerText = `${data.cTemp}°`;
     cwCondition.innerText = `${data.cWeatherCondition}`;
     cldt.innerHTML = `<p class="cwl-dayName">${data.cDayName}</p>
@@ -193,6 +193,37 @@ function setWAGData(data) {
     wag_Pressure.innerText = `${data.cPressure} hPa`;
 }
 
+function setGauge(value) {
+    //Limit value between 0 & 11
+    value = Math.max(0, Math.min(value, 11));
+
+    //value to angle conversion
+    const angle = 180 - (value / 11) * 180;
+
+    const radians = angle * Math.PI / 180;
+
+    //indicatoe length
+    const length = 70;
+
+    const centerX = 160;
+    const centerY = 145;
+
+    const endX = centerX + length * Math.cos(radians);
+    const endY = centerX - length * Math.sin(radians);
+
+    document.getElementById("indicator").setAttribute("x2", endX);
+    document.getElementById("indicator").setAttribute("y2", endY);
+}
+
+
+function setUIData(data) {
+    const cw_uvIndex = document.querySelector(".cw-uvIndex");
+    const cw_uvIndex_max = document.querySelector(".cw-uvIndex-Max");
+    setGauge(data.cwUVIndex);
+    cw_uvIndex.innerText = `${data.cwUVIndex}`;
+    cw_uvIndex_max.innerText = `${data.cwUVIndexMax}`;
+}
+
 async function handleCitySearch(cityName) {
     const data = await getWeatherData(cityName);
     if (!data) {
@@ -203,6 +234,7 @@ async function handleCitySearch(cityName) {
     setWeatherCardBG(weatherCondition);
     setHeroSectionData(data.Current);
     setWAGData(data.Current);
+    setUIData(data.Current);
     console.log(weatherCondition);
     return data;
 }
@@ -240,6 +272,8 @@ async function main() {
 
     setHeroSectionData(data.Current);
     setWAGData(data.Current);
+    // setGauge(data.Current.cwUVIndex);
+    setUIData(data.Current);
     updateDynamicTheme(data.Current.cWeatherConditionTheme);
     setWeatherCardBG(data.Current.cWeatherConditionTheme);
     currentThemeMode = "Dynamic Mode";
@@ -525,25 +559,4 @@ function updateAQI(aqi) {
 }
 updateAQI(80);
 
-function setGauge(value) {
-    //Limit value between 0 & 11
-    value = Math.max(0, Math.min(value, 11));
 
-    //value to angle conversion
-    const angle = 180 - (value / 11) * 180;
-
-    const radians = angle * Math.PI / 180;
-
-    //indicatoe length
-    const length = 70;
-
-    const centerX = 160;
-    const centerY = 145;
-
-    const endX = centerX + length * Math.cos(radians);
-    const endY = centerX - length * Math.sin(radians);
-
-    document.getElementById("indicator").setAttribute("x2", endX);
-    document.getElementById("indicator").setAttribute("y2", endY);
-}
-setGauge(6.2);
