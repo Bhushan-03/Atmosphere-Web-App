@@ -80,7 +80,7 @@ async function getWCTheme(data) {
     return "Unknown";
 }
 
-async function getWeatherCondition(data) {
+function getWeatherCondition(data) {
     const weatherCode = data;
     if (weatherCode === 0) return "Clear Sky";
     if ([1,2,3].includes(weatherCode)) return "Cloudy";
@@ -103,15 +103,15 @@ async function getCurrentWeather(data, airData) {
 
     let cw_map = new Map();
 
-    cw_map.set("cTime", `${await formatTime(data.current.time)}`);
-    cw_map.set("cDate", `${await formatDate(data.current.time)}`);
+    cw_map.set("cTime", `${formatTime(data.current.time)}`);
+    cw_map.set("cDate", `${formatDate(data.current.time)}`);
     cw_map.set("cDayName", `${await formatday(data.current.time)}`);
     cw_map.set("cTemp", `${data.current.temperature_2m}`);
     cw_map.set("cHumidity", `${data.current.relative_humidity_2m}`);
     cw_map.set("cFeelslike", `${data.current.apparent_temperature}`);
     cw_map.set("cVisibility", `${await getVisibility(data.current)}`);
     cw_map.set("cPressure", `${data.current.pressure_msl}`);
-    cw_map.set("cWeatherCondition", `${await getWeatherCondition(data.current.weather_code)}`);
+    cw_map.set("cWeatherCondition", `${getWeatherCondition(data.current.weather_code)}`);
     cw_map.set("cWeatherConditionTheme", `${await getWCTheme(data)}`);
     cw_map.set("todaysmaxTemp", `${data.daily.temperature_2m_max[0]}`);
     cw_map.set("todaysminTemp", `${data.daily.temperature_2m_min[0]}`);
@@ -137,14 +137,14 @@ async function getCurrentWeather(data, airData) {
 }
 
 async function getSunrise(data) {
-    return await formatTime(data["daily"]["sunrise"][0]);
+    return formatTime(data.daily.sunrise[0]);
 }
 
 async function getSunset(data) {
-    return await formatTime(data["daily"]["sunset"][0]);
+    return formatTime(data.daily.sunset[0]);
 }
 
-async function formatTime(time) {
+function formatTime(time) {
     return new Date(time).toLocaleTimeString("en-US", {
         hour: "numeric",
         minute: "2-digit",
@@ -152,7 +152,7 @@ async function formatTime(time) {
     });
 }
 
-async function formatDate(date) {
+function formatDate(date) {
     return new Date(date).toLocaleDateString("en-GB", {
         day: "numeric",
         month: "short",
@@ -182,88 +182,67 @@ async function getLocationName(response) {
     }
 }
 
+function getCurrentHourIndex(data) {
+    const currentHour = data.current.time.slice(0,13) + ":00";
+    const currentHourIndex = data.hourly.time.findIndex(time => time === currentHour);
+    return currentHourIndex;
+}
+
 async function getHourlyDate(data) {
-    let dates = [];
-
-    data.hourly.time.forEach(async hourlyTime => {
-        dates.push(`${await formatDate(hourlyTime)}`);
-    });
-    return dates;
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.time.slice(chIndex, chIndex + 24).map(formatDate);
 }
 
-async function getHourlyTime(data) {
-    let timeList = [];
-
-    data.hourly.time.forEach(async hourlyTime => {
-        timeList.push(`${await formatTime(hourlyTime)}`);
-    });
-    return timeList;
+function getHourlyTime(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.time.slice(chIndex, chIndex + 24).map(formatTime);
 }
 
-async function getHourlyTemp(data) {
-    let tempList = [];
-
-    data.hourly.temperature_2m.forEach(async hourlyTemp => {
-        tempList.push(`${hourlyTemp}`);
-    });
-    return tempList;
+function getHourlyTemp(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.temperature_2m.slice(chIndex, chIndex + 24);
 }
 
-async function getHourlyHumidity(data) {
-    let humidityList = [];
-
-    data.hourly.relative_humidity_2m.forEach(async hourlyHumidity => {
-        humidityList.push(hourlyHumidity);
-    });
-    return humidityList;
+function getHourlyHumidity(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.relative_humidity_2m.slice(chIndex, chIndex + 24);
 }
 
-async function getHourlyApparentTemp(data) {
-    let apparentTempList = [];
-
-    data.hourly.apparent_temperature.forEach(async hourlyApparentTemp => {
-        apparentTempList.push(hourlyApparentTemp);
-    });
-    return apparentTempList;
+function getHourlyRainP(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.precipitation_probability.slice(chIndex, chIndex + 24);
 }
 
-async function getHourlyPrecipitation(data) {
-    let hourlyPrecipitationList = [];
-
-    data.hourly.precipitation_probability.forEach(async hourlyPP => {
-        hourlyPrecipitationList.push(hourlyPP);
-    });
-    return hourlyPrecipitationList;
+function getHourlyApparentTemp(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.apparent_temperature.slice(chIndex, chIndex + 24);
 }
 
-async function getHourlyWeatherCondition(data) {
-    let hourlyWCList = [];
+// function getHourlyPrecipitation(data) {
+//     const chIndex = getCurrentHourIndex(data);
+//     return data.hourly.precipitation_probability.slice(chIndex, chIndex + 24);
+// }
 
-    data.hourly.weather_code.forEach(async hourlyWC => {
-        hourlyWCList.push(await getWeatherCondition(hourlyWC));
-    });
-    return hourlyWCList;
+function getHourlyWeatherCondition(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.weather_code.slice(chIndex, chIndex + 24).map(getWeatherCondition);
 }
 
-async function getHourlyWindGusts(data) {
-    let hourlyWGList = [];
-
-    data.hourly.wind_gusts_10m.forEach(async hourlyWG => {
-        hourlyWGList.push(hourlyWG);
-    });
-    return hourlyWGList;
+function getHourlyWindGusts(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.wind_gusts_10m.slice(chIndex, chIndex + 24);
 }
 
-async function getHoulryData(data) {
+async function getHourlyData(data) {
     const hourlyDates = await getHourlyDate(data);
-    const hourlyTime = await getHourlyTime(data);
-    const hourlyTemp = await getHourlyTemp(data);
-    const hourlyHumidity = await getHourlyHumidity(data);
-    const hourlyApparentTemp = await getHourlyApparentTemp(data);
-    const hourlyPrecipitation = await getHourlyPrecipitation(data);
-    const hourlyWeatherCondition = await getHourlyWeatherCondition(data);
-    const hourlyWindGusts = await getHourlyWindGusts(data);
-    return {hourlyDates, hourlyTime, hourlyTemp, hourlyHumidity, hourlyApparentTemp, hourlyPrecipitation, hourlyWeatherCondition, hourlyWindGusts};
+    const hourlyTime = getHourlyTime(data);
+    const hourlyTemp = getHourlyTemp(data);
+    const hourlyHumidity = getHourlyHumidity(data);
+    const hourlyRain = getHourlyRainP(data);
+    const hourlyApparentTemp = getHourlyApparentTemp(data);
+    const hourlyWeatherCondition = getHourlyWeatherCondition(data);
+    const hourlyWindGusts = getHourlyWindGusts(data);
+    return {hourlyDates, hourlyTime, hourlyTemp, hourlyHumidity, hourlyRain, hourlyApparentTemp, hourlyWeatherCondition, hourlyWindGusts};
 }
 
 
@@ -275,7 +254,7 @@ async function main(cityname) {
     const weatherData = await getWeather(lat, lon);
     const AirQualityData = await getAirData(lat, lon);
     const cwData = await getCurrentWeather(weatherData, AirQualityData);
-    const hourlyData = await getHoulryData(weatherData);
+    const hourlyData = await getHourlyData(weatherData);
     return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}, hourlyData};
 }
 

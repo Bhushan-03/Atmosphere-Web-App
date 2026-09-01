@@ -228,14 +228,15 @@ function setUIData(data) {
     setGauge(data.cwUVIndex);
     setWindDirection(data.cwWindDirection);
     setAQIData(data);
+    updateSunPosition(data.cwSunrise, data.cwSunset);
     cw_uvIndex.innerText = `${data.cwUVIndex}`;
     cw_uvIndex_max.innerText = `${data.cwUVIndexMax}`;
     today_sunrise.innerText = `${data.cwSunrise}`;
     today_sunset.innerText = `${data.cwSunset}`;
     today_dlduration.innerText = `${data.cwDayLightDuration}`;
-    cw_wSpeed.innerText = `${data.cwWindSpeed}`;
+    cw_wSpeed.innerText = `${data.cwWindSpeed} km/h`;
     cw_wDirection.innerText = `${data.cwWindDirection}`;
-    cw_wGusts.innerText = `${data.cwWindGusts}`;
+    cw_wGusts.innerText = `${data.cwWindGusts} km/h`;
 }
 
 async function handleCitySearch(cityName) {
@@ -249,7 +250,9 @@ async function handleCitySearch(cityName) {
     setHeroSectionData(data.Current);
     setWAGData(data.Current);
     setUIData(data.Current);
-    console.log(weatherCondition);
+    setHourlyData(data);
+    temo_ov_linegraph(data);
+    windChart(data);
     return data;
 }
 
@@ -297,7 +300,6 @@ function setWindDirection(direction) {
     arrow.setAttribute("transform", `rotate(${rotation} 184 163)`);
 }
 
-
 function setAQIData(data) {
     const aqiValue = document.querySelector(".caqi-value");
     const aqiPM2_5 = document.querySelector(".caqiPM2_5");
@@ -307,7 +309,6 @@ function setAQIData(data) {
     const aqiCO = document.querySelector(".caqiCO");
     const aqiSO2 = document.querySelector(".caqiSO2");
     updateAQI(data.caqAQI);
-    setInterval(() => {updateSunPosition(data.cwSunrise, data.cwSunset)}, 1000);
     aqiValue.innerText = `${data.caqAQI}`;
     aqiPM2_5.innerText = `${data.caqPM2_5}`;
     aqiPM10.innerText = `${data.caqPM10}`;
@@ -322,23 +323,49 @@ function setAQIData(data) {
     });
 }
 
+function setHourlyData(data) {
+    const hourlyBoxContainer = document.querySelector(".h-fc-boxes");
+    hourlyBoxContainer.innerHTML = "";
+    console.log(data.hourlyData);
+
+    for (let i = 0; i <= 12; i++) {
+        hourlyBoxContainer.innerHTML = hourlyBoxContainer.innerHTML + 
+        `<div class="h-fc-b w-22 rounded-xl p-2 bg-(--weather-cards)">
+            <p class="flex justify-self-center text-sm font-semibold">${data.hourlyData.hourlyTime[i]}</p>
+            <img class="w-15 h-15 flex justify-self-center" src="Assets/partly-cloudy-day.png" alt="">
+            <p class="flex justify-self-center font-semibold">${data.hourlyData.hourlyTemp[i]}°</p>
+            <div class="rain-possebility flex items-center justify-center space-x-1 mt-1">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 256 256" xml:space="preserve">
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                        <path d="M 45 90 c -18.12 0 -32.833 -14.667 -33.494 -33.391 l -0.002 -0.105 c 0 -15.42 10.55 -27.84 19.027 -37.82 c 4.985 -5.87 9.694 -11.414 11.065 -16.127 C 42.041 1.027 43.409 0 45 0 s 2.959 1.027 3.403 2.556 l 0 0 c 1.371 4.714 6.08 10.258 11.065 16.127 c 8.477 9.98 19.026 22.4 19.026 37.82 l -0.002 0.105 C 77.833 75.333 63.121 90 45 90 z M 17.504 56.451 C 18.077 71.903 30.145 84 45 84 c 14.856 0 26.923 -12.097 27.496 -27.549 c -0.025 -13.192 -9.361 -24.184 -17.6 -33.883 C 50.951 17.924 47.383 13.723 45 9.585 c -2.383 4.138 -5.951 8.339 -9.896 12.983 C 26.866 32.267 17.529 43.259 17.504 56.451 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,183,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                    </g>
+                </svg>
+                <p class="text-sm">${data.hourlyData.hourlyRain[i]}%</p>
+                </div>
+            </div>`;
+    }
+}
+
 
 async function main() {
 
     // showSkeletonLoader(true);
 
     const data = await getWeatherData("Mumbai");
-    console.log(data);
+
+    console.log(data.hourlyData);
     if (!data) {
         return;
     }
-
+    
     // hideSkeletonLoader(false);
-
+    
     setHeroSectionData(data.Current);
     setWAGData(data.Current);
-    // setGauge(data.Current.cwUVIndex);
     setUIData(data.Current);
+    setHourlyData(data);
+    temo_ov_linegraph(data);
+    windChart(data);
     updateDynamicTheme(data.Current.cWeatherConditionTheme);
     setWeatherCardBG(data.Current.cWeatherConditionTheme);
     currentThemeMode = "Dynamic Mode";
@@ -368,7 +395,6 @@ function showSideBar() {
 showSideBar();
 
 
-
 function caltempdiff(min, max) {
     let tempDiff = Number(max) - Number(min);
     if (tempDiff >= 9) {
@@ -396,7 +422,8 @@ function setTempBar() {
 setTempBar();
 
 
-function temo_ov_linegraph() {
+function temo_ov_linegraph(data) {
+    document.querySelector('.tov-line-chart').innerHTML = "";
     var chartOptions = {
         chart: {
             height: 400,
@@ -414,12 +441,12 @@ function temo_ov_linegraph() {
         },
         series: [
             {
-                name: 'Feels Like',
-                data: [30, 31, 30, 29, 31, 32, 30, 31],
+                name: 'Feels Like (°C)',
+                data: data.hourlyData.hourlyApparentTemp.slice(0,13),
             },
             {
-                name: 'Temperature',
-                data: [25, 21, 24, 23, 24, 22, 23, 24],
+                name: 'Temperature (°C)',
+                data: data.hourlyData.hourlyTemp.slice(0,13),
             },
         ],
         markers: {
@@ -435,11 +462,11 @@ function temo_ov_linegraph() {
                 bottom: 0,
             },
         },
-
+        
         yaxis: {
-            min: 20,
-            max: 34,
-            tickAmount: 14,
+            min: 14,
+            max: 36,
+            tickAmount: 11,
             labels: {
                 style: {
                     color: '#6E729B',
@@ -449,9 +476,8 @@ function temo_ov_linegraph() {
                 },
             },
         },
-
-        //   labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
-        labels: ['12 PM', '3 PM', '6 PM', '9 PM', '12 AM', '3 AM', '6 AM', '9 AM'],
+        
+        labels: data.hourlyData.hourlyTime.slice(0,13),
         xaxis: {
             tooltip: {
                 enabled: false,
@@ -478,12 +504,12 @@ function temo_ov_linegraph() {
     var lineChart = new ApexCharts(document.querySelector('.tov-line-chart'), chartOptions);
     lineChart.render();
 }
-temo_ov_linegraph();
 
-function windChart() {
+function windChart(data) {
+    document.querySelector(".wind-graph-container").innerHTML = `<canvas id="windGustChart"></canvas>`;
     const canvas = document.getElementById("windGustChart");
-    const labels = ["12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM", "12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM", "8 AM", "9 AM"];
-    const windGusts = [10, 17, 22, 19, 18, 24, 25, 23, 17, 18, 14, 10, 18, 20, 18, 17, 24, 25, 18, 16, 16, 23];
+    const labels = data.hourlyData.hourlyTime.slice(0,13);
+    const windGusts = data.hourlyData.hourlyWindGusts.slice(0,13);
     const ctx = canvas.getContext("2d");
 
     // Blue gradient
@@ -556,7 +582,6 @@ function windChart() {
         }
     });
 }
-windChart();
 
 function getAQIInfo(aqi) {
 
