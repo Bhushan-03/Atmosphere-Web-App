@@ -323,7 +323,6 @@ function setAQIData(data) {
 }
 
 
-
 async function main() {
 
     // showSkeletonLoader(true);
