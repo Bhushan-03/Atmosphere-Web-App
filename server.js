@@ -68,8 +68,8 @@ async function getPrecipitation(data) {
     return (data["current"]["precipitation"] * 100);
 }
 
-async function getWCTheme(data) {
-    const weatherCode = data["current"]["weather_code"];
+function getWCTheme(data) {
+    const weatherCode = data;
     if (weatherCode === 0) return "Clear Sky";
     if (weatherCode === 1) return "Partly Cloudy";
     if ([2, 3].includes(weatherCode)) return "Cloudy";
@@ -83,7 +83,8 @@ async function getWCTheme(data) {
 function getWeatherCondition(data) {
     const weatherCode = data;
     if (weatherCode === 0) return "Clear Sky";
-    if ([1,2,3].includes(weatherCode)) return "Cloudy";
+    if (weatherCode === 1) return "Partly Cloudy";
+    if ([2,3].includes(weatherCode)) return "Cloudy";
     if ([45,48].includes(weatherCode)) return "Fog";
     if ([51, 53, 55].includes(weatherCode)) return "Drizzle";
     if ([56, 57].includes(weatherCode)) return "Freezing drizzle";
@@ -112,7 +113,7 @@ async function getCurrentWeather(data, airData) {
     cw_map.set("cVisibility", `${await getVisibility(data.current)}`);
     cw_map.set("cPressure", `${data.current.pressure_msl}`);
     cw_map.set("cWeatherCondition", `${getWeatherCondition(data.current.weather_code)}`);
-    cw_map.set("cWeatherConditionTheme", `${await getWCTheme(data)}`);
+    cw_map.set("cWeatherConditionTheme", `${getWCTheme(data.current.weather_code)}`);
     cw_map.set("todaysmaxTemp", `${data.daily.temperature_2m_max[0]}`);
     cw_map.set("todaysminTemp", `${data.daily.temperature_2m_min[0]}`);
     cw_map.set("cwWindSpeed", `${data.current.wind_speed_10m}`);
@@ -228,6 +229,11 @@ function getHourlyWeatherCondition(data) {
     return data.hourly.weather_code.slice(chIndex, chIndex + 24).map(getWeatherCondition);
 }
 
+function getHourlyWCTheme(data) {
+    const chIndex = getCurrentHourIndex(data);
+    return data.hourly.weather_code.slice(chIndex, chIndex + 24).map(getWCTheme);
+}
+
 function getHourlyWindGusts(data) {
     const chIndex = getCurrentHourIndex(data);
     return data.hourly.wind_gusts_10m.slice(chIndex, chIndex + 24);
@@ -241,8 +247,9 @@ async function getHourlyData(data) {
     const hourlyRain = getHourlyRainP(data);
     const hourlyApparentTemp = getHourlyApparentTemp(data);
     const hourlyWeatherCondition = getHourlyWeatherCondition(data);
+    const hourlyWCName = getHourlyWCTheme(data);
     const hourlyWindGusts = getHourlyWindGusts(data);
-    return {hourlyDates, hourlyTime, hourlyTemp, hourlyHumidity, hourlyRain, hourlyApparentTemp, hourlyWeatherCondition, hourlyWindGusts};
+    return {hourlyDates, hourlyTime, hourlyTemp, hourlyHumidity, hourlyRain, hourlyApparentTemp, hourlyWeatherCondition, hourlyWCName, hourlyWindGusts};
 }
 
 

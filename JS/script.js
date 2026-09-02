@@ -323,6 +323,19 @@ function setAQIData(data) {
     });
 }
 
+function getWeatherIcon(weatherCondition) {
+    const conditions = {
+        "Clear Sky": "ClearSky.png",
+        "Partly Cloudy": "PartlyCloudy.png",
+        "Cloudy": "Cloudy.png",
+        "Rainy": "Rainy.png",
+        "Thunderstorm": "Thunderstorm.png",
+        "Fog": "Fog.png",
+        "Snow": "Snow.png"
+    };
+    return conditions[weatherCondition];
+}
+
 function setHourlyData(data) {
     const hourlyBoxContainer = document.querySelector(".h-fc-boxes");
     hourlyBoxContainer.innerHTML = "";
@@ -332,7 +345,7 @@ function setHourlyData(data) {
         hourlyBoxContainer.innerHTML = hourlyBoxContainer.innerHTML + 
         `<div class="h-fc-b w-22 rounded-xl p-2 bg-(--weather-cards)">
             <p class="flex justify-self-center text-sm font-semibold">${data.hourlyData.hourlyTime[i]}</p>
-            <img class="w-15 h-15 flex justify-self-center" src="Assets/partly-cloudy-day.png" alt="">
+            <img class="w-15 h-15 flex justify-self-center" src="Assets/icons/${getWeatherIcon(data.hourlyData.hourlyWCName[i])}" alt="">
             <p class="flex justify-self-center font-semibold">${data.hourlyData.hourlyTemp[i]}°</p>
             <div class="rain-possebility flex items-center justify-center space-x-1 mt-1">
                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 256 256" xml:space="preserve">
