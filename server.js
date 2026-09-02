@@ -30,7 +30,7 @@ async function getCoordinates(city) {
 
 async function getWeather(lat,lon) {
     try {
-        let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,daylight_duration&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,rain,pressure_msl,temperature_2m_max,temperature_2m_min,uv_index&forecast_days=14&timezone=auto`);
+        let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=apparent_temperature_max,weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,daylight_duration&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,visibility,rain,pressure_msl,temperature_2m_max,temperature_2m_min,uv_index&forecast_days=14&timezone=auto`);
         if(!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
@@ -167,6 +167,14 @@ async function formatday(date) {
     });
 }
 
+function formatDayDate(date) {
+    return new Date(date).toLocaleDateString("en-US", {
+        weekday: "short",
+        day: "numeric",
+        month: "short"
+    });
+}
+
 async function formatDuration(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -219,11 +227,6 @@ function getHourlyApparentTemp(data) {
     return data.hourly.apparent_temperature.slice(chIndex, chIndex + 24);
 }
 
-// function getHourlyPrecipitation(data) {
-//     const chIndex = getCurrentHourIndex(data);
-//     return data.hourly.precipitation_probability.slice(chIndex, chIndex + 24);
-// }
-
 function getHourlyWeatherCondition(data) {
     const chIndex = getCurrentHourIndex(data);
     return data.hourly.weather_code.slice(chIndex, chIndex + 24).map(getWeatherCondition);
@@ -252,6 +255,40 @@ async function getHourlyData(data) {
     return {hourlyDates, hourlyTime, hourlyTemp, hourlyHumidity, hourlyRain, hourlyApparentTemp, hourlyWeatherCondition, hourlyWCName, hourlyWindGusts};
 }
 
+function getDailyDay(data) {
+    return data.daily.time.map(formatDayDate);
+}
+
+function getDailyWeatherCondition(data) {
+    return data.daily.weather_code.map(getWCTheme);
+}
+
+function getDailyMinTemp(data) {
+    return data.daily.temperature_2m_min;
+}
+
+function getDailyMaxTemp(data) {
+    return data.daily.temperature_2m_max;
+}
+
+function getDailyMaxFeelsLike(data) {
+    return data.daily.apparent_temperature_max;
+}
+
+function getDailyPP(data) {
+    return data.daily.precipitation_probability_max;
+}
+
+async function getDailyData(data) {
+    const dailyDay = getDailyDay(data);
+    const dailyWCondition = getDailyWeatherCondition(data);
+    const dailyMinTemp = getDailyMinTemp(data);
+    const dailyMaxTemp = getDailyMaxTemp(data);
+    const dailyMaxFeelsLike = getDailyMaxFeelsLike(data);
+    const dailyPrepProbability = getDailyPP(data);
+    return {dailyDay, dailyWCondition, dailyMinTemp, dailyMaxTemp, dailyMaxFeelsLike, dailyPrepProbability};
+}
+
 
 async function main(cityname) {
     const apiResponse = await getCoordinates(cityname);
@@ -262,15 +299,14 @@ async function main(cityname) {
     const AirQualityData = await getAirData(lat, lon);
     const cwData = await getCurrentWeather(weatherData, AirQualityData);
     const hourlyData = await getHourlyData(weatherData);
-    return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}, hourlyData};
+    const dailyData = await getDailyData(weatherData);
+    return combined = {"Current": {...locationName, ...Object.fromEntries(cwData)}, hourlyData, dailyData};
 }
 
 app.get("/city/:cityName", async (req,res) => {
     const cityName = req.params.cityName;
     console.log(cityName);
     const WeatherRes = await main(cityName);
-    // console.log(WeatherRes);
-    // console.log(WeatherRes);
     res.json(WeatherRes);
 });
 
