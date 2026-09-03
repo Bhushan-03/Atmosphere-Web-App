@@ -172,7 +172,7 @@ function setHeroSectionData(data) {
 function setWAGData(data) {
     const wag_Humidity = document.querySelector(".wag-Humidity");
     const wag_windSpeed = document.querySelector(".wag-windSpeed");
-    const wag_windDirection = document.querySelector(".wag-windDirection");
+    // const wag_windDirection = document.querySelector(".wag-windDirection");
     const wag_Precipitation = document.querySelector(".wag-Precipitation");
     const wag_uvIndex = document.querySelector(".wag-uvIndex");
     const wag_Visibility = document.querySelector(".wag-Visibility");
@@ -183,10 +183,10 @@ function setWAGData(data) {
 
     wag_Humidity.innerText = `${data.cHumidity}%`;
     wag_windSpeed.innerText = `${data.cwWindSpeed} km/h`;
-    wag_windDirection.innerText = `${data.cwWindDirection}`;
+    // wag_windDirection.innerText = `${data.cwWindDirection}`;
     wag_Precipitation.innerText = `${data.cwPrecipitation}%`;
     wag_uvIndex.innerText = `${data.cwUVIndex}`;
-    wag_Visibility.innerText = `${data.cVisibility} km`;
+    wag_Visibility.innerText = `${data.cVisibility}km`;
     wag_CloudCover.innerText = `${data.cwCloudCover}%`;
     wag_Sunrise.innerText = `${data.cwSunrise}`;
     wag_Sunset.innerText = `${data.cwSunset}`;
