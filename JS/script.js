@@ -366,8 +366,8 @@ function setDailyFC(data) {
     dailyFCContainer.innerHTML = "";
     for (let i = 1; i <= 7; i++){
         dailyFCContainer.innerHTML = dailyFCContainer.innerHTML + 
-        `<div class="d${i}-fc grid grid-cols-[1.5fr_1fr_3fr_1fr] lap:max-desk:grid-cols-[1.5fr_0.5fr_1.2fr_0.8fr] items-center justify-center">
-            <p class="">${data.dailyData.dailyDay[i]}</p>
+        `<div class="d${i}-fc grid shrink-0 w-24 grid-cols-[1.5fr_1fr_3fr_1fr] lap:max-desk:grid-cols-[1.5fr_0.5fr_1.2fr_0.8fr] items-center justify-center">
+            <p class="text-nowrap">${data.dailyData.dailyDay[i]}</p>
             <img class="w-10 h-10 mr-4 flex justify-self-center" src="Assets/icons/${getWeatherIcon(data.dailyData.dailyWCondition[i])}" alt="">
             <div class="flex lap:max-desk:justify-around ">
                 <p class="p-1 min-temp w-[29.5%]">${data.dailyData.dailyMaxTemp[i]}°</p>
